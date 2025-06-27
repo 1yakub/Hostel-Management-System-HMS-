@@ -120,8 +120,8 @@ The HMS follows a modern MVC architecture pattern:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/1yakub/hostel-management-system.git
-   cd hostel-management-system
+   git clone https://github.com/1yakub/Hostel-Management-System-HMS-.git
+   cd Hostel-Management-System-HMS-
    ```
 
 2. **Install PHP dependencies**
@@ -288,9 +288,15 @@ This project is developed for academic and learning purposes. Please contact the
 *Computer Science & Engineering Student*  
 *Independent University, Bangladesh*
 
-[![Email](https://img.shields.io/badge/Email-1830968@iub.edu.bd-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:1830968@iub.edu.bd)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-yakubhossain-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yakubhossain)
-[![GitHub](https://img.shields.io/badge/GitHub-1yakub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/1yakub)
+<a href="mailto:1830968@iub.edu.bd" target="_blank">
+  <img src="https://img.shields.io/badge/Email-1830968@iub.edu.bd-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
+</a>
+<a href="https://linkedin.com/in/yakubhossain" target="_blank">
+  <img src="https://img.shields.io/badge/LinkedIn-yakubhossain-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+</a>
+<a href="https://github.com/1yakub" target="_blank">
+  <img src="https://img.shields.io/badge/GitHub-1yakub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+</a>
 
 ---
 
@@ -317,10 +323,10 @@ CEO, Varygen Corp Ltd
 
 ## 📈 Project Stats
 
-![GitHub repo size](https://img.shields.io/github/repo-size/1yakub/hostel-management-system)
-![GitHub last commit](https://img.shields.io/github/last-commit/1yakub/hostel-management-system)
-![GitHub issues](https://img.shields.io/github/issues/1yakub/hostel-management-system)
-![GitHub stars](https://img.shields.io/github/stars/1yakub/hostel-management-system)
+![GitHub repo size](https://img.shields.io/github/repo-size/1yakub/Hostel-Management-System-HMS-)
+![GitHub last commit](https://img.shields.io/github/last-commit/1yakub/Hostel-Management-System-HMS-)
+![GitHub issues](https://img.shields.io/github/issues/1yakub/Hostel-Management-System-HMS-)
+![GitHub stars](https://img.shields.io/github/stars/1yakub/Hostel-Management-System-HMS-)
 
 ---
 
