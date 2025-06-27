@@ -6,6 +6,16 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![Tests](https://img.shields.io/github/actions/workflow/status/1yakub/Hostel-Management-System-HMS-/laravel.yml?style=for-the-badge&logo=github&logoColor=white&label=Tests)](https://github.com/1yakub/Hostel-Management-System-HMS-/actions/workflows/laravel.yml)
 
+## 🌐 Live Demo
+
+🎯 **Try the application:** [**Live Demo**](https://your-hms-demo.up.railway.app) *(Coming Soon)*
+
+**Demo Accounts:**
+- 👨‍💼 **Staff:** `staff@example.com` / `password`
+- 👤 **Guest:** `guest@example.com` / `password`
+
+---
+
 A comprehensive web-based hostel management solution developed during an internship at Varygen Corp Ltd. This system streamlines hostel operations through automated booking management, room tracking, and integrated payment processing.
 
 ## 🏢 Project Overview
@@ -20,11 +30,13 @@ A comprehensive web-based hostel management solution developed during an interns
 
 ## 📋 Table of Contents
 
+- [Live Demo](#-live-demo)
 - [Features](#-features)
 - [Technology Stack](#️-technology-stack)
 - [System Architecture](#️-system-architecture)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
+- [Deployment](#-deployment)
 - [User Roles & Access](#-user-roles--access)
 - [Testing](#-testing)
 - [Performance Metrics](#-performance-metrics)
@@ -175,6 +187,89 @@ The HMS follows a modern MVC architecture pattern:
    ```
 
 Visit `http://localhost:8000` to access the application.
+
+## 🚀 Deployment
+
+### Deploy to Railway (Recommended)
+
+Railway provides excellent Laravel hosting with a generous free tier:
+
+1. **Sign up at [Railway](https://railway.app)**
+
+2. **Click "Deploy from GitHub"** and select this repository
+
+3. **Add environment variables:**
+   ```env
+   APP_NAME=HMS
+   APP_ENV=production
+   APP_DEBUG=false
+   APP_URL=https://your-app-name.up.railway.app
+   DB_CONNECTION=pgsql
+   # Database variables will be auto-populated by Railway
+   ```
+
+4. **Railway will automatically:**
+   - Install dependencies (`composer install`)
+   - Build assets (`npm run build`)
+   - Run migrations (`php artisan migrate --force`)
+   - Seed database (`php artisan db:seed --force`)
+
+5. **Your demo will be live** at `https://your-app-name.up.railway.app`
+
+### Deploy to Render
+
+1. **Fork this repository** to your GitHub account
+
+2. **Sign up at [Render](https://render.com)**
+
+3. **Create a new Web Service** from your GitHub repo
+
+4. **Configure build & start commands:**
+   - **Build Command:** `composer install --no-dev && npm ci && npm run build`
+   - **Start Command:** `php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT`
+
+5. **Add environment variables** similar to Railway setup
+
+### Deploy to Heroku
+
+1. **Install Heroku CLI** and login
+
+2. **Create Heroku app:**
+   ```bash
+   heroku create your-hms-demo
+   heroku addons:create heroku-postgresql:mini
+   ```
+
+3. **Configure environment:**
+   ```bash
+   heroku config:set APP_ENV=production
+   heroku config:set APP_DEBUG=false
+   heroku config:set APP_KEY=$(php artisan --show-key)
+   ```
+
+4. **Deploy:**
+   ```bash
+   git push heroku main
+   ```
+
+### Production Environment Setup
+
+**Required Environment Variables:**
+```env
+APP_NAME=HMS
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://your-domain.com
+DB_CONNECTION=pgsql
+SESSION_DRIVER=database
+CACHE_DRIVER=database
+QUEUE_CONNECTION=database
+LOG_LEVEL=error
+```
+
+**Demo Credentials:**
+- **Staff:** `staff@example.com` / `password`
+- **Guest:** `guest@example.com` / `password`
 
 ## 👤 User Roles & Access
 
