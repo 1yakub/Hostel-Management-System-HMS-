@@ -21,6 +21,10 @@ class PasswordConfirmationTest extends TestCase
 
     public function test_password_can_be_confirmed(): void
     {
+        $this->withoutMiddleware([
+            \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
+        ]);
+
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post('/confirm-password', [
@@ -33,6 +37,10 @@ class PasswordConfirmationTest extends TestCase
 
     public function test_password_is_not_confirmed_with_invalid_password(): void
     {
+        $this->withoutMiddleware([
+            \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
+        ]);
+
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post('/confirm-password', [
