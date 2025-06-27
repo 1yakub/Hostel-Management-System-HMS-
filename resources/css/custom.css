@@ -1,0 +1,50 @@
+/* Luxury Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: theme("colors.luxury.100");
+}
+
+::-webkit-scrollbar-thumb {
+    background: theme("colors.luxury.400");
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: theme("colors.luxury.500");
+}
+
+/* Luxury Card Hover Effect */
+.luxury-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.luxury-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Luxury Input Focus Effect */
+.luxury-input:focus {
+    box-shadow: 0 0 0 2px theme("colors.luxury.200");
+}
+
+/* Luxury Loading Spinner */
+.luxury-spinner {
+    border: 3px solid theme("colors.luxury.200");
+    border-top: 3px solid theme("colors.luxury.600");
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
