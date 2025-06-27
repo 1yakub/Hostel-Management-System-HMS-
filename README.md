@@ -230,19 +230,19 @@ php artisan test
 <div align="center">
 
 ### 🏠 Landing Page
-![HMS Landing Page](screenshots/landing-page.png)
+![HMS Landing Page](screenshots/landing_page.png)
 *Modern, responsive landing page with room showcase and booking interface*
 
 ### 📊 Staff Dashboard
-![Staff Dashboard](screenshots/admin-dashboard.png)
+![Staff Dashboard](screenshots/admin_dashboard.png)
 *Comprehensive dashboard with real-time statistics and quick actions*
 
 ### 🏨 Room Management
-![Room Management](screenshots/room-management.png)
+![Room Management](screenshots/room_management.png)
 *Intuitive room management interface with status tracking*
 
 ### 📅 Booking Interface
-![Booking Interface](screenshots/booking-interface.png)
+![Booking Interface](screenshots/booking_interface.png)
 *User-friendly booking system with date validation and room selection*
 
 </div>
