@@ -4,7 +4,7 @@
 [![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
 [![MySQL](https://img.shields.io/badge/MySQL-5.7+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![CI/CD](https://github.com/1yakub/Hostel-Management-System-HMS-/actions/workflows/laravel.yml/badge.svg)](https://github.com/1yakub/Hostel-Management-System-HMS-/actions/workflows/laravel.yml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/1yakub/Hostel-Management-System-HMS-/laravel.yml?style=for-the-badge&logo=github&logoColor=white&label=Tests)](https://github.com/1yakub/Hostel-Management-System-HMS-/actions/workflows/laravel.yml)
 
 A comprehensive web-based hostel management solution developed during an internship at Varygen Corp Ltd. This system streamlines hostel operations through automated booking management, room tracking, and integrated payment processing.
 
