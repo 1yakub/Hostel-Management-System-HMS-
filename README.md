@@ -4,6 +4,7 @@
 [![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
 [![MySQL](https://img.shields.io/badge/MySQL-5.7+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![CI/CD](https://github.com/1yakub/Hostel-Management-System-HMS-/actions/workflows/laravel.yml/badge.svg)](https://github.com/1yakub/Hostel-Management-System-HMS-/actions/workflows/laravel.yml)
 
 A comprehensive web-based hostel management solution developed during an internship at Varygen Corp Ltd. This system streamlines hostel operations through automated booking management, room tracking, and integrated payment processing.
 
@@ -208,6 +209,20 @@ php artisan test
 - Booking system functionality
 - Payment processing
 - API endpoints
+
+## 🔄 CI/CD Pipeline
+
+This project includes automated GitHub Actions workflow that:
+
+- ✅ **Runs automatically** on every push/pull request to `main`
+- 🐘 **Tests with PHP 8.2** and Laravel 11
+- 🗃️ **Uses SQLite** for fast testing
+- 📦 **Installs dependencies** (Composer & NPM)
+- 🧪 **Executes all tests** (PHPUnit/Pest)
+- 🎨 **Builds frontend assets** (Vite/Tailwind)
+- 📊 **Reports status** via GitHub badge
+
+**View CI/CD Results:** [GitHub Actions](https://github.com/1yakub/Hostel-Management-System-HMS-/actions)
 
 ## 📊 Performance Metrics
 
