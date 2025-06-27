@@ -21,7 +21,7 @@ class StaffMiddleware
         }
 
         if (!Auth::user()->is_staff) {
-            return redirect()->route('guest.dashboard')
+            return redirect()->route('dashboard')
                 ->with('error', 'This area is restricted to staff members only.');
         }
 

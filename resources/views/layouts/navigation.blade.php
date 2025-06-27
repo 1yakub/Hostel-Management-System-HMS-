@@ -6,7 +6,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ auth()->user()->is_staff ? route('staff.dashboard') : route('guest.dashboard') }}"
+                    <a href="{{ auth()->user()->is_staff ? route('staff.dashboard') : route('dashboard') }}"
                         class="flex items-center space-x-2">
                         <div
                             class="w-10 h-10 rounded-full bg-luxury-800 dark:bg-luxury-700 flex items-center justify-center">
@@ -36,7 +36,7 @@
                             {{ __('Guests') }}
                         </x-nav-link>
                     @else
-                        <x-nav-link :href="route('guest.dashboard')" :active="request()->routeIs('guest.dashboard')">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
                         <x-nav-link :href="route('guest.bookings')" :active="request()->routeIs('guest.bookings')">
@@ -130,7 +130,7 @@
                     {{ __('Guests') }}
                 </x-responsive-nav-link>
             @else
-                <x-responsive-nav-link :href="route('guest.dashboard')" :active="request()->routeIs('guest.dashboard')">
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('guest.bookings')" :active="request()->routeIs('guest.bookings')">
@@ -155,8 +155,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
-                        onclick="event.preventDefault();
+                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>

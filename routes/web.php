@@ -55,7 +55,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return redirect()->route('staff.dashboard');
         }
         return view('guest.dashboard');
-    })->name('guest.dashboard');
+    })->name('dashboard');
 
     Route::get('/my-bookings', [GuestBookingController::class, 'index'])->name('guest.bookings');
     Route::get('/book-now', [GuestBookingController::class, 'create'])->name('guest.booking.create');

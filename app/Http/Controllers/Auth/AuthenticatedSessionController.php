@@ -28,7 +28,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('staff.dashboard', absolute: false));
+        // Redirect to appropriate dashboard based on user role
+        if (Auth::user()->is_staff) {
+            return redirect()->intended(route('staff.dashboard', absolute: false));
+        }
+
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**
