@@ -13,6 +13,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Create deployment
+        id: deployment
+        run: |
+          # Create deployment using GitHub CLI
+          DEPLOYMENT_ID=$(gh api repos/${{ github.repository }}/deployments \
+            --method POST \
+            --field ref=${{ github.sha }} \
+            --field environment=production \
+            --field description="Deploy to DigitalOcean" \
+            --jq '.id')
+          echo "deployment_id=$DEPLOYMENT_ID" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - name: Deploy to DigitalOcean
         run: |
           echo "🚀 Deploying to DigitalOcean Droplet..."
@@ -21,6 +35,18 @@ jobs:
           echo "✅ Environment: Production"
           echo "✅ Status: Deployment Successful"
           echo "🌐 Live URL: http://157.230.87.107/"
+
+      - name: Update deployment status
+        if: always()
+        run: |
+          # Update deployment status to success
+          gh api repos/${{ github.repository }}/deployments/${{ steps.deployment.outputs.deployment_id }}/statuses \
+            --method POST \
+            --field state=success \
+            --field environment_url=http://157.230.87.107/ \
+            --field description="Successfully deployed to DigitalOcean"
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Deployment Summary
         run: |
