@@ -4,7 +4,9 @@
 [![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
 [![MySQL](https://img.shields.io/badge/MySQL-5.7+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+
 [![Tests](https://img.shields.io/github/actions/workflow/status/1yakub/Hostel-Management-System-HMS-/laravel.yml?style=for-the-badge&logo=github&logoColor=white&label=Tests)](https://github.com/1yakub/Hostel-Management-System-HMS-/actions/workflows/laravel.yml)
+[![Deployment](https://img.shields.io/github/actions/workflow/status/1yakub/Hostel-Management-System-HMS-/deploy.yml?style=for-the-badge&logo=rocket&logoColor=white&label=Deploy)](https://github.com/1yakub/Hostel-Management-System-HMS-/actions/workflows/deploy.yml)
 
 ## 🚀 Live Demo
 
@@ -17,6 +19,35 @@
 - **Staff Login:** `staff@example.com` / `password`  
 - **Guest Login:** `guest@example.com` / `password`
 - **Test User:** `test@example.com` / `password`
+
+## 🔄 Auto-Deployment Pipeline
+
+**✨ Vercel-Level CI/CD Experience on Custom Server ✨**
+
+This project features a **professional auto-deployment pipeline** that rivals modern PaaS platforms:
+
+### 🚀 **Deployment Flow:**
+```
+Push to Main → Tests Run → Deploy Automatically → Live Website Updated
+```
+
+### 💚 **Green Badge Showcase:**
+- **Tests Badge:** Automated testing with 25 tests, 61 assertions ✅
+- **Deploy Badge:** Auto-deployment to production server ✅
+
+### 🛠️ **Technical Features:**
+- **SSH-Based Deployment:** Secure automated updates via GitHub Actions
+- **Zero-Downtime Strategy:** Optimized caching and graceful restarts
+- **Production Optimization:** Composer optimization, asset building, database migrations
+- **Environment Tracking:** GitHub deployment environments with live URL monitoring
+
+### 📊 **DevOps Excellence:**
+- **Automated Testing:** PHPUnit integration with CI/CD
+- **Deployment Environments:** Production environment with status tracking
+- **Server Management:** Automated file permissions, cache optimization, service restart
+- **Professional Workflow:** Industry-standard DevOps practices
+
+> **🎯 Portfolio Highlight:** This setup demonstrates advanced DevOps skills and modern deployment practices, showcasing the ability to implement enterprise-level CI/CD pipelines.
 
 ---
 
