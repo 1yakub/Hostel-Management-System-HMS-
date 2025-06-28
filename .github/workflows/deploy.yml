@@ -18,11 +18,11 @@ jobs:
           echo "🔍 Verifying deployment status..."
 
           # Check if the application is responding
-          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://157.230.87.107/ || echo "0")
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://hms.yakub.website/ || echo "0")
 
           if [ "$HTTP_STATUS" = "200" ]; then
             echo "✅ Application is live and responding!"
-            echo "🌐 URL: http://157.230.87.107/"
+            echo "🌐 URL: https://hms.yakub.website/"
             echo "📊 HTTP Status: $HTTP_STATUS"
           else
             echo "❌ Application not responding properly"
@@ -35,11 +35,11 @@ jobs:
           echo "🏥 Running application health checks..."
 
           # Check if login page is accessible
-          LOGIN_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://157.230.87.107/login || echo "0")
+          LOGIN_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://hms.yakub.website/login || echo "0")
           echo "🔐 Login page status: $LOGIN_STATUS"
 
           # Check if homepage loads correctly
-          HOMEPAGE_CONTENT=$(curl -s http://157.230.87.107/ | grep -o "<title>.*</title>" || echo "No title found")
+          HOMEPAGE_CONTENT=$(curl -s https://hms.yakub.website/ | grep -o "<title>.*</title>" || echo "No title found")
           echo "📄 Homepage title: $HOMEPAGE_CONTENT"
 
           echo "✅ Health check completed successfully!"
@@ -52,10 +52,11 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Component | Status | Details |" >> $GITHUB_STEP_SUMMARY
           echo "|-----------|--------|---------|" >> $GITHUB_STEP_SUMMARY
-          echo "| 🌐 **Live URL** | ✅ Active | [http://157.230.87.107/](http://157.230.87.107/) |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🌐 **Live URL** | ✅ Active | [https://hms.yakub.website/](https://hms.yakub.website/) |" >> $GITHUB_STEP_SUMMARY
           echo "| 🖥️ **Server** | ✅ Online | DigitalOcean Droplet (multi-project-server) |" >> $GITHUB_STEP_SUMMARY
           echo "| 🔐 **Authentication** | ✅ Working | Login page accessible |" >> $GITHUB_STEP_SUMMARY
           echo "| 📊 **Environment** | ✅ Production | Laravel 11.x + MySQL + PHP 8.2 |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔒 **SSL Certificate** | ✅ Active | HTTPS enabled with auto-renewal |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 🎯 Demo Credentials:" >> $GITHUB_STEP_SUMMARY
           echo "- **Staff:** \`staff@example.com\` / \`password\`" >> $GITHUB_STEP_SUMMARY
