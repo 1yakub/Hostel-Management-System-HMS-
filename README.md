@@ -6,13 +6,14 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![Tests](https://img.shields.io/github/actions/workflow/status/1yakub/Hostel-Management-System-HMS-/laravel.yml?style=for-the-badge&logo=github&logoColor=white&label=Tests)](https://github.com/1yakub/Hostel-Management-System-HMS-/actions/workflows/laravel.yml)
 
-## 🌐 Live Demo
+## 🚀 Live Demo
 
-🎯 **Try the application:** [**Live Demo**](https://your-hms-demo.com) *(Coming Soon)*
+**✨ [View Live Demo](http://157.230.87.107/) ✨**
 
-**Demo Accounts:**
-- 👨‍💼 **Staff:** `staff@example.com` / `password`
-- 👤 **Guest:** `guest@example.com` / `password`
+### Demo Credentials:
+- **Staff Login:** `staff@example.com` / `password`  
+- **Guest Login:** `guest@example.com` / `password`
+- **Test User:** `test@example.com` / `password`
 
 ---
 
