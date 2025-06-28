@@ -21,3 +21,7 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# DigitalOcean CLI (platform-specific external tool)
+doctl.exe
+doctl.zip
