@@ -2,11 +2,16 @@ name: 🚀 Deploy to Production
 
 on:
   workflow_run:
-    workflows: ["Laravel"]
+    workflows: ["Laravel HMS Tests"]
     types:
       - completed
     branches:
       - main
+
+permissions:
+  deployments: write
+  contents: read
+  actions: read
 
 jobs:
   deploy:
