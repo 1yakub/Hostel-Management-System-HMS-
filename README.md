@@ -20,35 +20,6 @@
 - **Guest Login:** `guest@example.com` / `password`
 - **Test User:** `test@example.com` / `password`
 
-## 🔄 Auto-Deployment Pipeline
-
-**✨ Vercel-Level CI/CD Experience on Custom Server ✨**
-
-This project features a **professional auto-deployment pipeline** that rivals modern PaaS platforms:
-
-### 🚀 **Deployment Flow:**
-```
-Push to Main → Tests Run → Deploy Automatically → Live Website Updated
-```
-
-### 💚 **Green Badge Showcase:**
-- **Tests Badge:** Automated testing with 25 tests, 61 assertions ✅
-- **Deploy Badge:** Auto-deployment to production server ✅
-
-### 🛠️ **Technical Features:**
-- **SSH-Based Deployment:** Secure automated updates via GitHub Actions
-- **Zero-Downtime Strategy:** Optimized caching and graceful restarts
-- **Production Optimization:** Composer optimization, asset building, database migrations
-- **Environment Tracking:** GitHub deployment environments with live URL monitoring
-
-### 📊 **DevOps Excellence:**
-- **Automated Testing:** PHPUnit integration with CI/CD
-- **Deployment Environments:** Production environment with status tracking
-- **Server Management:** Automated file permissions, cache optimization, service restart
-- **Professional Workflow:** Industry-standard DevOps practices
-
-> **🎯 Portfolio Highlight:** This setup demonstrates advanced DevOps skills and modern deployment practices, showcasing the ability to implement enterprise-level CI/CD pipelines.
-
 ---
 
 A comprehensive web-based hostel management solution developed during an internship at Varygen Corp Ltd. This system streamlines hostel operations through automated booking management, room tracking, and integrated payment processing.
@@ -71,6 +42,7 @@ A comprehensive web-based hostel management solution developed during an interns
 - [System Architecture](#️-system-architecture)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
+- [Deployment](#-deployment)
 - [User Roles & Access](#-user-roles--access)
 - [Testing](#-testing)
 - [Performance Metrics](#-performance-metrics)
@@ -139,6 +111,7 @@ A comprehensive web-based hostel management solution developed during an interns
 - **Dependency Management:** Composer, npm
 - **Version Control:** Git
 - **Testing:** PHPUnit
+- **CI/CD:** GitHub Actions (auto-testing and deployment)
 - **Code Standards:** PSR-12
 
 ## 🏗️ System Architecture
@@ -222,26 +195,29 @@ The HMS follows a modern MVC architecture pattern:
 
 Visit `http://localhost:8000` to access the application.
 
+## 🚀 Deployment
 
+This project includes automatic deployment to production. When you push to the main branch:
 
-### Production Environment Setup
+1. **Tests run automatically** (25 tests, takes ~3 minutes)
+2. **If tests pass**, the code deploys to the live server automatically
+3. **Website updates** without any manual work
 
-**Required Environment Variables:**
-```env
-APP_NAME=HMS
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://hms.yakub.website
-DB_CONNECTION=pgsql
-SESSION_DRIVER=database
-CACHE_DRIVER=database
-QUEUE_CONNECTION=database
-LOG_LEVEL=error
+The deployment handles composer updates, asset building, database migrations, and server restart. Pretty neat for a student project! 
+
+**Live demo:** https://hms.yakub.website
+
+### Manual Deployment (if needed)
+```bash
+# SSH to your server
+ssh user@your-server
+
+# Pull changes and update
+git pull origin main
+composer install --no-dev
+npm run build
+php artisan migrate --force
 ```
-
-**Demo Credentials:**
-- **Staff:** `staff@example.com` / `password`
-- **Guest:** `guest@example.com` / `password`
 
 ## 👤 User Roles & Access
 
