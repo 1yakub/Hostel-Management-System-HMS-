@@ -1,2 +1,9 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap
+Sitemap: https://hms.yakub.website/sitemap.xml
+
+# Allow all search engines to index the site
+# HMS - Hostel Management System Demo
+# Laravel 11.x live demo

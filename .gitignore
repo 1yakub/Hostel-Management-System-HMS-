@@ -28,3 +28,6 @@ doctl.zip
 
 # Private deployment and server information (never commit)
 DEPLOYMENT_NOTES.md
+
+# Personal CV notes and context (never commit)
+CV_NOTES.md

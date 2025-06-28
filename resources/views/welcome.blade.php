@@ -4,7 +4,30 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name') }}</title>
+    <title>{{ config('app.name') }} - Hostel Management System | Laravel Demo</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Professional hostel management system built with Laravel 11.x. Live demo featuring room booking, guest management, and payment processing. Modern HMS solution.">
+    <meta name="keywords" content="hostel management system, laravel, booking system, room management, demo, HMS, hotel management">
+    <meta name="author" content="Md Yakub Hossain">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hms.yakub.website/">
+    <meta property="og:title" content="HMS - Hostel Management System | Laravel Demo">
+    <meta property="og:description" content="Professional hostel management system built with Laravel 11.x. Live demo featuring room booking and guest management.">
+    <meta property="og:image" content="https://hms.yakub.website/favicon.svg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://hms.yakub.website/">
+    <meta property="twitter:title" content="HMS - Hostel Management System | Laravel Demo">
+    <meta property="twitter:description" content="Professional hostel management system built with Laravel 11.x. Live demo featuring room booking and guest management.">
+    <meta property="twitter:image" content="https://hms.yakub.website/favicon.svg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://hms.yakub.website/">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
