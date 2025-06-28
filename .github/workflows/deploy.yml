@@ -101,7 +101,7 @@ jobs:
               state: 'success',
               environment: 'production',
               environment_url: 'https://hms.yakub.website',
-              description: 'Deployment completed successfully! 🎉'
+              description: 'Deployment completed successfully!'
             });
 
       - name: ❌ Mark Deployment Failure
