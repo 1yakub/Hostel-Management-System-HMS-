@@ -25,3 +25,6 @@ yarn-error.log
 # DigitalOcean CLI (platform-specific external tool)
 doctl.exe
 doctl.zip
+
+# Private deployment and server information (never commit)
+DEPLOYMENT_NOTES.md
