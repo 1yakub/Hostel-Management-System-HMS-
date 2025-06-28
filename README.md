@@ -8,7 +8,10 @@
 
 ## 🚀 Live Demo
 
-**✨ [View Live Demo](http://157.230.87.107/) ✨**
+**✨ [View Live Demo](https://hms.yakub.website/) ✨**
+
+> **🌐 Custom Domain:** `hms.yakub.website` (Professional subdomain)  
+> **🔒 SSL Certificate:** HTTPS enabled for secure access
 
 ### Demo Credentials:
 - **Staff Login:** `staff@example.com` / `password`  
@@ -197,7 +200,7 @@ Visit `http://localhost:8000` to access the application.
 APP_NAME=HMS
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://your-domain.com
+APP_URL=https://hms.yakub.website
 DB_CONNECTION=pgsql
 SESSION_DRIVER=database
 CACHE_DRIVER=database
