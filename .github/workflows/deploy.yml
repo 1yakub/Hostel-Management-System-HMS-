@@ -1,65 +1,79 @@
-name: Deploy to DigitalOcean
+name: 🚀 Deploy to Production
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["Laravel"]
+    types:
+      - completed
+    branches:
+      - main
 
 jobs:
   deploy:
+    name: 🌐 Deploy to Server
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    environment:
+      name: production
+      url: https://hms.yakub.website
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: 🚀 Deploy to Production Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "🚀 Starting deployment to HMS Production Server..."
 
-      - name: Verify Live Application
+            # Navigate to project directory
+            cd /var/www/hostel-management
+
+            # Pull latest changes from main branch
+            echo "📥 Pulling latest changes..."
+            git pull origin main
+
+            # Install/update Composer dependencies (production optimized)
+            echo "📦 Installing Composer dependencies..."
+            composer install --no-dev --optimize-autoloader --no-interaction
+
+            # Install/update Node dependencies and build assets
+            echo "🏗️ Building frontend assets..."
+            npm install --production=false
+            npm run build
+
+            # Run database migrations (if any)
+            echo "🗄️ Running database migrations..."
+            php artisan migrate --force --no-interaction
+
+            # Clear and optimize caches
+            echo "🧹 Optimizing application caches..."
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            php artisan optimize
+
+            # Ensure proper file permissions
+            echo "🔐 Setting file permissions..."
+            chown -R www-data:www-data storage bootstrap/cache
+            chmod -R 755 storage bootstrap/cache
+
+            # Restart web server for optimal performance
+            echo "🔄 Restarting web server..."
+            systemctl restart apache2
+
+            echo "✅ Deployment completed successfully!"
+            echo "🌐 HMS is now live at: https://hms.yakub.website"
+
+      - name: 📊 Deployment Status
+        if: always()
         run: |
-          echo "🔍 Verifying deployment status..."
-
-          # Check if the application is responding
-          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://hms.yakub.website/ || echo "0")
-
-          if [ "$HTTP_STATUS" = "200" ]; then
-            echo "✅ Application is live and responding!"
-            echo "🌐 URL: https://hms.yakub.website/"
-            echo "📊 HTTP Status: $HTTP_STATUS"
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✅ Deployment SUCCESSFUL! 🎉"
+            echo "🌐 Live at: https://hms.yakub.website"
           else
-            echo "❌ Application not responding properly"
-            echo "📊 HTTP Status: $HTTP_STATUS"
-            exit 1
+            echo "❌ Deployment FAILED! 😞"
+            echo "Please check the logs above for details."
           fi
-
-      - name: Application Health Check
-        run: |
-          echo "🏥 Running application health checks..."
-
-          # Check if login page is accessible
-          LOGIN_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://hms.yakub.website/login || echo "0")
-          echo "🔐 Login page status: $LOGIN_STATUS"
-
-          # Check if homepage loads correctly
-          HOMEPAGE_CONTENT=$(curl -s https://hms.yakub.website/ | grep -o "<title>.*</title>" || echo "No title found")
-          echo "📄 Homepage title: $HOMEPAGE_CONTENT"
-
-          echo "✅ Health check completed successfully!"
-
-      - name: Deployment Summary
-        run: |
-          echo "## 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### ✅ Status: SUCCESS" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Component | Status | Details |" >> $GITHUB_STEP_SUMMARY
-          echo "|-----------|--------|---------|" >> $GITHUB_STEP_SUMMARY
-          echo "| 🌐 **Live URL** | ✅ Active | [https://hms.yakub.website/](https://hms.yakub.website/) |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🖥️ **Server** | ✅ Online | DigitalOcean Droplet (multi-project-server) |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🔐 **Authentication** | ✅ Working | Login page accessible |" >> $GITHUB_STEP_SUMMARY
-          echo "| 📊 **Environment** | ✅ Production | Laravel 11.x + MySQL + PHP 8.2 |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🔒 **SSL Certificate** | ✅ Active | HTTPS enabled with auto-renewal |" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🎯 Demo Credentials:" >> $GITHUB_STEP_SUMMARY
-          echo "- **Staff:** \`staff@example.com\` / \`password\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **Guest:** \`guest@example.com\` / \`password\`" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**🕒 Deployed:** $(date)" >> $GITHUB_STEP_SUMMARY
