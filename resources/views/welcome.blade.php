@@ -227,7 +227,7 @@
                                 <h2
                                     class="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-luxury-800 dark:text-luxury-200 leading-tight">
                                     Experience<br>
-                                    Refined Living
+                                    Luxury Living
                                 </h2>
                                 <p class="text-xl text-luxury-600 dark:text-luxury-400 max-w-xl leading-relaxed">
                                     Welcome to {{ config('app.name') }}, where exceptional service meets unparalleled
