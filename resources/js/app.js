@@ -59,26 +59,60 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Mobile menu functionality
-const mobileMenuButton = document.querySelector("[data-mobile-menu]");
-const mobileMenu = document.querySelector(".mobile-menu");
-const openIcon = mobileMenuButton?.querySelector(".mobile-menu-open");
-const closeIcon = mobileMenuButton?.querySelector(".mobile-menu-close");
+document.addEventListener("DOMContentLoaded", () => {
+    const mobileMenuButtons = document.querySelectorAll("[data-mobile-menu]");
+    const mobileMenu = document.querySelector(".mobile-menu");
+    const navbarMenuButton = document.querySelector(".md\\:hidden [data-mobile-menu]");
+    const openIcon = navbarMenuButton?.querySelector(".mobile-menu-open");
+    const closeIcon = navbarMenuButton?.querySelector(".mobile-menu-close");
 
-if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-        openIcon?.classList.toggle("hidden");
-        closeIcon?.classList.toggle("hidden");
-        document.body.classList.toggle("overflow-hidden");
+    // Toggle mobile menu
+    const toggleMobileMenu = () => {
+        if (mobileMenu) {
+            const isHidden = mobileMenu.classList.contains("hidden");
+            
+            if (isHidden) {
+                mobileMenu.classList.remove("hidden");
+                openIcon?.classList.add("hidden");
+                closeIcon?.classList.remove("hidden");
+                document.body.classList.add("overflow-hidden");
+            } else {
+                mobileMenu.classList.add("hidden");
+                openIcon?.classList.remove("hidden");
+                closeIcon?.classList.add("hidden");
+                document.body.classList.remove("overflow-hidden");
+            }
+        }
+    };
+
+    // Add click listeners to all mobile menu buttons
+    mobileMenuButtons.forEach((button) => {
+        button.addEventListener("click", toggleMobileMenu);
     });
 
-    // Close mobile menu when clicking on links
-    mobileMenu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-            mobileMenu.classList.add("hidden");
-            openIcon?.classList.remove("hidden");
-            closeIcon?.classList.add("hidden");
-            document.body.classList.remove("overflow-hidden");
+    // Close mobile menu when clicking on navigation links
+    if (mobileMenu) {
+        mobileMenu.querySelectorAll("a[href^='#']").forEach((link) => {
+            link.addEventListener("click", () => {
+                mobileMenu.classList.add("hidden");
+                openIcon?.classList.remove("hidden");
+                closeIcon?.classList.add("hidden");
+                document.body.classList.remove("overflow-hidden");
+            });
         });
+
+        // Close mobile menu when clicking outside
+        mobileMenu.addEventListener("click", (e) => {
+            if (e.target === mobileMenu) {
+                toggleMobileMenu();
+            }
+        });
+    }
+
+    // Handle escape key to close mobile menu
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileMenu && !mobileMenu.classList.contains("hidden")) {
+            toggleMobileMenu();
+        }
     });
-}
+});

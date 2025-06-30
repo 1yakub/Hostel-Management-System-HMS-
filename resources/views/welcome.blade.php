@@ -173,42 +173,57 @@
 
                                 <!-- Right Navigation -->
                                 <div class="flex items-center space-x-6">
-                                    @auth
-                                        <a href="{{ url('/dashboard') }}"
-                                            class="text-luxury-600 dark:text-luxury-400 hover:text-luxury-800 dark:hover:text-luxury-200 font-medium transition-colors">
-                                            Dashboard
-                                        </a>
-                                    @else
-                                        <a href="{{ route('login') }}"
-                                            class="text-luxury-600 dark:text-luxury-400 hover:text-luxury-800 dark:hover:text-luxury-200 font-medium transition-colors">
-                                            Sign In
-                                        </a>
-
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('guest.booking.create') }}"
-                                                class="inline-flex items-center px-4 py-2 bg-luxury-800 dark:bg-luxury-700 text-white font-medium rounded-lg hover:bg-luxury-900 dark:hover:bg-luxury-600 transition-colors shadow-sm">
-                                                <span>Book Now</span>
-                                                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                                </svg>
+                                    <!-- Desktop Navigation -->
+                                    <div class="hidden md:flex items-center space-x-6">
+                                        @auth
+                                            <a href="{{ url('/dashboard') }}"
+                                                class="text-luxury-600 dark:text-luxury-400 hover:text-luxury-800 dark:hover:text-luxury-200 font-medium transition-colors">
+                                                Dashboard
                                             </a>
-                                        @endif
-                                    @endauth
+                                        @else
+                                            <a href="{{ route('login') }}"
+                                                class="text-luxury-600 dark:text-luxury-400 hover:text-luxury-800 dark:hover:text-luxury-200 font-medium transition-colors">
+                                                Sign In
+                                            </a>
 
-                                    <!-- Dark Mode Toggle -->
-                                    <button type="button" data-dark-toggle aria-label="Switch to dark mode"
-                                        class="w-10 h-10 rounded-lg bg-luxury-50 dark:bg-gray-800 flex items-center justify-center text-luxury-800 dark:text-luxury-200 hover:bg-luxury-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400">
-                                        <span class="sr-only">Toggle dark mode</span>
-                                        <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                                        </svg>
-                                        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
+                                            @if (Route::has('register'))
+                                                <a href="{{ route('guest.booking.create') }}"
+                                                    class="inline-flex items-center px-4 py-2 bg-luxury-800 dark:bg-luxury-700 text-white font-medium rounded-lg hover:bg-luxury-900 dark:hover:bg-luxury-600 transition-colors shadow-sm">
+                                                    <span>Book Now</span>
+                                                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                                    </svg>
+                                                </a>
+                                            @endif
+                                        @endauth
+
+                                        <!-- Dark Mode Toggle -->
+                                        <button type="button" data-dark-toggle aria-label="Switch to dark mode"
+                                            class="w-10 h-10 rounded-lg bg-luxury-50 dark:bg-gray-800 flex items-center justify-center text-luxury-800 dark:text-luxury-200 hover:bg-luxury-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400">
+                                            <span class="sr-only">Toggle dark mode</span>
+                                            <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                                            </svg>
+                                            <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <!-- Mobile Menu Button -->
+                                    <button type="button" data-mobile-menu
+                                        class="md:hidden w-10 h-10 flex items-center justify-center text-luxury-800 dark:text-luxury-200 hover:bg-luxury-50 dark:hover:bg-gray-800 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400"
+                                        aria-label="Toggle mobile menu">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path class="mobile-menu-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 6h16M4 12h16M4 18h16" />
+                                            <path class="mobile-menu-close hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M6 18L18 6M6 6l12 12" />
                                         </svg>
                                     </button>
                                 </div>
@@ -496,35 +511,98 @@
         </footer>
     </div>
 
-    <!-- Mobile Menu Button -->
-    <button type="button" data-mobile-menu
-        class="md:hidden w-10 h-10 flex items-center justify-center text-luxury-800 dark:text-luxury-200 hover:bg-luxury-50 dark:hover:bg-gray-800 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400"
-        aria-label="Toggle mobile menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path class="mobile-menu-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16" />
-            <path class="mobile-menu-close hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M6 18L18 6M6 6l12 12" />
-        </svg>
-    </button>
-
     <!-- Mobile Menu -->
-    <div class="mobile-menu hidden fixed inset-0 z-50 bg-white/95 dark:bg-gray-900/95 md:hidden">
-        <div class="container mx-auto px-6 py-8">
-            <nav class="space-y-6">
-                <a href="#rooms"
-                    class="block text-lg text-luxury-800 dark:text-luxury-200 hover:text-luxury-600 dark:hover:text-luxury-400">
-                    Rooms
-                </a>
-                <a href="#amenities"
-                    class="block text-lg text-luxury-800 dark:text-luxury-200 hover:text-luxury-600 dark:hover:text-luxury-400">
-                    Amenities
-                </a>
-                <a href="#contact"
-                    class="block text-lg text-luxury-800 dark:text-luxury-200 hover:text-luxury-600 dark:hover:text-luxury-400">
-                    Contact
-                </a>
-            </nav>
+    <div class="mobile-menu hidden fixed inset-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm md:hidden">
+        <div class="flex flex-col h-full">
+            <!-- Mobile Menu Header -->
+            <div class="flex justify-between items-center p-6 border-b border-luxury-200 dark:border-luxury-800">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-luxury-800 dark:bg-luxury-700 flex items-center justify-center">
+                        <span class="font-serif text-lg font-bold text-white">
+                            {{ substr(config('app.name'), 0, 1) }}
+                        </span>
+                    </div>
+                    <div>
+                        <h2 class="font-serif text-lg font-bold text-luxury-800 dark:text-luxury-200">
+                            {{ config('app.name') }}
+                        </h2>
+                        <p class="text-xs text-luxury-600 dark:text-luxury-400">Luxury Hotel & Resort</p>
+                    </div>
+                </div>
+                
+                <!-- Close Button -->
+                <button type="button" data-mobile-menu
+                    class="w-10 h-10 flex items-center justify-center text-luxury-800 dark:text-luxury-200 hover:bg-luxury-50 dark:hover:bg-gray-800 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400"
+                    aria-label="Close mobile menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Content -->
+            <div class="flex-1 overflow-y-auto p-6">
+                <nav class="space-y-1">
+                    <!-- Navigation Links -->
+                    <a href="#rooms"
+                        class="block px-4 py-3 text-lg text-luxury-800 dark:text-luxury-200 hover:bg-luxury-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                        Rooms
+                    </a>
+                    <a href="#amenities"
+                        class="block px-4 py-3 text-lg text-luxury-800 dark:text-luxury-200 hover:bg-luxury-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                        Amenities
+                    </a>
+                    <a href="#contact"
+                        class="block px-4 py-3 text-lg text-luxury-800 dark:text-luxury-200 hover:bg-luxury-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                        Contact
+                    </a>
+
+                    <!-- Divider -->
+                    <div class="h-px bg-luxury-200 dark:bg-luxury-800 my-4"></div>
+
+                    <!-- User Actions -->
+                    @auth
+                        <a href="{{ url('/dashboard') }}"
+                            class="block px-4 py-3 text-lg text-luxury-800 dark:text-luxury-200 hover:bg-luxury-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                            Dashboard
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}"
+                            class="block px-4 py-3 text-lg text-luxury-800 dark:text-luxury-200 hover:bg-luxury-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                            Sign In
+                        </a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('guest.booking.create') }}"
+                                class="block px-4 py-3 mx-4 mt-2 bg-luxury-800 dark:bg-luxury-700 text-white text-center font-semibold rounded-lg hover:bg-luxury-900 dark:hover:bg-luxury-600 transition-colors shadow-sm">
+                                Book Now
+                            </a>
+                        @endif
+                    @endauth
+                </nav>
+            </div>
+
+            <!-- Mobile Menu Footer -->
+            <div class="p-6 border-t border-luxury-200 dark:border-luxury-800">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-luxury-600 dark:text-luxury-400">Theme</span>
+                    
+                    <!-- Dark Mode Toggle -->
+                    <button type="button" data-dark-toggle aria-label="Switch to dark mode"
+                        class="w-12 h-6 rounded-full bg-luxury-200 dark:bg-luxury-700 relative focus:outline-none focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400 transition-colors">
+                        <div class="w-5 h-5 rounded-full bg-white dark:bg-luxury-200 shadow-sm transform transition-transform translate-x-0.5 dark:translate-x-6 flex items-center justify-center">
+                            <svg class="w-3 h-3 text-luxury-800 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
+                            </svg>
+                            <svg class="w-3 h-3 text-luxury-800 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </body>
