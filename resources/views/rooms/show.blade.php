@@ -1,108 +1,57 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Room {{ $room->room_number }} Details
-            </h2>
-            <div class="space-x-4">
-                <a href="{{ route('rooms.edit', $room) }}"
-                    class="inline-flex items-center px-4 py-2 bg-luxury-600 dark:bg-luxury-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-luxury-700 dark:hover:bg-luxury-600 transition ease-in-out duration-150">
-                    Edit Room
-                </a>
-                <a href="{{ route('rooms.index') }}"
-                    class="inline-flex items-center px-4 py-2 bg-luxury-600 dark:bg-luxury-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-luxury-700 dark:hover:bg-luxury-600 transition ease-in-out duration-150">
-                    Back to Rooms
-                </a>
-            </div>
+        <div>
+            <a href="{{ route('rooms.index') }}" class="text-sm text-slate hover:text-fern-600">&larr; Rooms</a>
+            <h1 class="mt-1 text-2xl font-semibold tracking-tight">Room {{ $room->room_number }} <span class="font-normal text-slate">{{ $room->room_type }}</span></h1>
         </div>
+        <a href="{{ route('rooms.edit', $room) }}" class="rounded-control border border-rule bg-white px-4 py-2 text-sm font-medium hover:bg-chalk-2">Edit</a>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xs sm:rounded-lg">
-                <div class="p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Room Information -->
-                        <div
-                            class="bg-luxury-50 dark:bg-luxury-900/50 p-6 rounded-lg border border-luxury-200 dark:border-luxury-800">
-                            <h3 class="text-2xl font-semibold text-luxury-800 dark:text-luxury-200 mb-4">
-                                Room Information
-                            </h3>
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="text-sm text-luxury-600/70 dark:text-luxury-400/70">Room
-                                        Number</label>
-                                    <p class="text-lg font-medium text-luxury-800 dark:text-luxury-200">
-                                        {{ $room->room_number }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <label class="text-sm text-luxury-600/70 dark:text-luxury-400/70">Capacity</label>
-                                    <p class="text-lg font-medium text-luxury-800 dark:text-luxury-200">
-                                        {{ $room->capacity }} persons
-                                    </p>
-                                </div>
-                                <div>
-                                    <label class="text-sm text-luxury-600/70 dark:text-luxury-400/70">Price per
-                                        Night</label>
-                                    <p class="text-lg font-medium text-luxury-800 dark:text-luxury-200">
-                                        ${{ number_format($room->price_per_night, 2) }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <label class="text-sm text-luxury-600/70 dark:text-luxury-400/70">Status</label>
-                                    <span @class([
-                                        'inline-block px-3 py-1 rounded-full text-sm font-medium mt-1',
-                                        'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' =>
-                                            $room->status === 'available',
-                                        'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' =>
-                                            $room->status === 'occupied',
-                                    ])>
-                                        {{ ucfirst($room->status) }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+    @php($active = $room->bookings()->whereIn('status', \App\Support\Availability::HOLDING_STATUSES)->orderBy('check_in_date')->with('guest')->get())
 
-                        <!-- Current/Last Booking -->
-                        <div
-                            class="bg-white dark:bg-gray-700 p-6 rounded-lg border border-luxury-200 dark:border-luxury-800">
-                            <h3 class="text-2xl font-semibold text-luxury-800 dark:text-luxury-200 mb-4">
-                                Current Booking
-                            </h3>
-                            @if ($room->bookings()->where('status', 'active')->first())
-                                @php $booking = $room->bookings()->where('status', 'active')->first() @endphp
-                                <div class="space-y-4">
-                                    <div>
-                                        <label class="text-sm text-luxury-600/70 dark:text-luxury-400/70">Guest</label>
-                                        <p class="text-lg font-medium text-luxury-800 dark:text-luxury-200">
-                                            {{ $booking?->guest?->name || 'Guest' }}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <label class="text-sm text-luxury-600/70 dark:text-luxury-400/70">Check-in
-                                            Date</label>
-                                        <p class="text-lg font-medium text-luxury-800 dark:text-luxury-200">
-                                            {{ $booking->check_in_date->format('M d, Y') }}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <label class="text-sm text-luxury-600/70 dark:text-luxury-400/70">Check-out
-                                            Date</label>
-                                        <p class="text-lg font-medium text-luxury-800 dark:text-luxury-200">
-                                            {{ $booking->check_out_date->format('M d, Y') }}
-                                        </p>
-                                    </div>
-                                </div>
-                            @else
-                                <p class="text-luxury-600/70 dark:text-luxury-400/70">
-                                    No active booking for this room.
-                                </p>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="grid gap-6 lg:grid-cols-3">
+        <x-panel title="Details" class="lg:col-span-1">
+            @if ($room->featured_image)
+                <img src="{{ asset(ltrim($room->featured_image, '/')) }}" width="600" height="450" alt="" class="mb-4 aspect-[4/3] w-full rounded-control object-cover">
+            @endif
+            <dl class="grid gap-4">
+                <x-definition label="Status"><x-status-badge :status="$room->status" /></x-definition>
+                <x-definition label="Sleeps">{{ $room->capacity }}</x-definition>
+                <x-definition label="Price per night">{{ config('hms.currency_symbol') }}{{ number_format($room->price_per_night, 2) }}</x-definition>
+                @if ($room->description)
+                    <x-definition label="Description">{{ $room->description }}</x-definition>
+                @endif
+                @if ($room->amenities)
+                    <x-definition label="Amenities">{{ implode(', ', $room->amenities) }}</x-definition>
+                @endif
+            </dl>
+        </x-panel>
+
+        <x-panel title="Upcoming and current bookings" class="lg:col-span-2">
+            @if ($active->isEmpty())
+                <p class="text-slate">No active booking. The room shows as free on the public site.</p>
+            @else
+                <table class="w-full text-sm">
+                    <thead class="text-left text-slate">
+                        <tr class="border-b border-rule">
+                            <th class="py-2 pr-4 font-medium">Guest</th>
+                            <th class="py-2 pr-4 font-medium">Check in</th>
+                            <th class="py-2 pr-4 font-medium">Check out</th>
+                            <th class="py-2 font-medium">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-rule">
+                        @foreach ($active as $booking)
+                            <tr>
+                                <td class="py-3 pr-4"><a href="{{ route('bookings.show', $booking) }}" class="font-medium hover:text-fern-600">{{ $booking->guest?->name ?? 'Guest' }}</a></td>
+                                <td class="py-3 pr-4">{{ $booking->check_in_date->format('D j M Y') }}</td>
+                                <td class="py-3 pr-4">{{ $booking->check_out_date->format('D j M Y') }}</td>
+                                <td class="py-3"><x-status-badge :status="$booking->status" /></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
+        </x-panel>
     </div>
 </x-app-layout>

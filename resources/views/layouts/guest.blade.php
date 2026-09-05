@@ -1,51 +1,36 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Favicon -->
+    <meta name="robots" content="noindex">
+    <title>{{ config('hms.hostel_name') }}</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <link rel="alternate icon" href="{{ asset('favicon.ico') }}">
-
-    <!-- Scripts -->
+    <link rel="preload" href="{{ asset('fonts/bricolage-grotesque-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-
-<body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-        <!-- Decorative Elements -->
-        <div class="absolute inset-0 z-0">
-            <div
-                class="absolute -left-48 -top-48 w-96 h-96 rounded-full bg-luxury-200/30 dark:bg-luxury-900/30 blur-3xl">
-            </div>
-            <div
-                class="absolute -right-48 -bottom-48 w-96 h-96 rounded-full bg-accent-200/30 dark:bg-accent-900/30 blur-3xl">
-            </div>
-            <div
-                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-white/5 dark:bg-black/5 backdrop-blur-3xl">
-            </div>
-        </div>
-
-        <div class="z-10">
-            <a href="/" class="font-serif text-2xl font-bold text-luxury-800 dark:text-luxury-200">
-                {{ config('app.name') }}
+<body class="min-h-screen bg-chalk text-ink antialiased">
+    <div class="mx-auto grid min-h-screen max-w-6xl md:grid-cols-2">
+        <div class="flex flex-col px-5 py-8 md:py-12">
+            <a href="{{ url('/') }}" class="flex items-center gap-3">
+                <span aria-hidden="true" class="grid size-9 place-items-center rounded-control bg-fern-500 text-chalk font-semibold">{{ mb_substr(config('hms.hostel_name'), 0, 1) }}</span>
+                <span class="text-lg font-semibold tracking-tight">{{ config('hms.hostel_name') }}</span>
             </a>
+            <div class="my-auto w-full max-w-md py-12">
+                {{ $slot }}
+            </div>
+            @if (config('hms.demo_mode'))
+                <div class="rounded-control border border-rule bg-chalk-2 p-4 text-sm text-slate">
+                    <p class="font-medium text-ink">Demo accounts</p>
+                    <p class="mt-1">Desk staff: staff@example.com &middot; Guest: guest@example.com &middot; password: <span class="font-mono">password</span></p>
+                    <p class="mt-1">The database resets every night.</p>
+                </div>
+            @endif
         </div>
-
-        <div
-            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-            {{ $slot }}
-        </div>
-
-        <div class="z-10 mt-8 text-center text-sm text-luxury-600/60 dark:text-luxury-400/60">
-            <p>© {{ date('Y') }} Luxury Hostel. All rights reserved.</p>
+        <div class="hidden md:block md:py-12 md:pr-5">
+            <img src="{{ asset('images/room-private.webp') }}" width="1024" height="768" alt="" class="h-full w-full rounded-photo object-cover" loading="lazy">
         </div>
     </div>
 </body>
-
 </html>

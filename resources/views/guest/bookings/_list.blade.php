@@ -1,44 +1,23 @@
 @if ($bookings->isEmpty())
-    <p class="text-luxury-600 dark:text-luxury-400">No bookings found.</p>
+    <x-empty-state title="No bookings yet" action="Check availability" :href="url('/#book')">Pick your dates on the site, choose a bed, and the request shows up here.</x-empty-state>
 @else
-    <div class="space-y-4">
+    <ul class="divide-y divide-rule">
         @foreach ($bookings as $booking)
-            <div
-                class="flex flex-col md:flex-row justify-between items-start md:items-center p-4 bg-luxury-50 dark:bg-luxury-900/50 rounded-lg">
-                <div class="flex items-center space-x-4">
-                    <div
-                        class="p-2 bg-{{ $booking->status_color }}-100 dark:bg-{{ $booking->status_color }}-900/30 rounded-full">
-                        <svg class="w-5 h-5 text-{{ $booking->status_color }}-600 dark:text-{{ $booking->status_color }}-400"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                        </svg>
-                    </div>
+            <li class="flex flex-wrap items-center justify-between gap-3 py-4">
+                <div class="flex items-center gap-4">
+                    @if ($booking->room->featured_image)
+                        <img src="{{ asset(ltrim($booking->room->featured_image, '/')) }}" width="96" height="72" alt="" class="hidden aspect-[4/3] w-24 rounded-control object-cover sm:block">
+                    @endif
                     <div>
-                        <h4 class="font-medium text-luxury-900 dark:text-luxury-100">
-                            Room {{ $booking->room->room_number }} - {{ $booking->room->room_type }}
-                        </h4>
-                        <p class="text-sm text-luxury-600 dark:text-luxury-400">
-                            {{ $booking->check_in_date->format('M d, Y') }} -
-                            {{ $booking->check_out_date->format('M d, Y') }}
-                        </p>
+                        <p class="font-medium">{{ $booking->room->room_type }} <span class="text-slate">room {{ $booking->room->room_number }}</span></p>
+                        <p class="text-sm text-slate">{{ $booking->check_in_date->format('D j M Y') }} to {{ $booking->check_out_date->format('D j M Y') }}, {{ $booking->check_in_date->diffInDays($booking->check_out_date) }} {{ $booking->check_in_date->diffInDays($booking->check_out_date) === 1 ? 'night' : 'nights' }}</p>
                     </div>
                 </div>
-                <div class="mt-4 md:mt-0 flex items-center space-x-4">
-                    <span
-                        class="px-3 py-1 text-sm font-medium rounded-full
-                        {{ $booking->status === 'active' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' : '' }}
-                        {{ $booking->status === 'pending' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' : '' }}
-                        {{ $booking->status === 'completed' ? 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400' : '' }}
-                        {{ $booking->status === 'cancelled' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' : '' }}
-                    ">
-                        {{ ucfirst($booking->status) }}
-                    </span>
-                    <span class="text-luxury-800 dark:text-luxury-200 font-medium">
-                        ${{ number_format($booking->total_amount, 2) }}
-                    </span>
+                <div class="flex items-center gap-4">
+                    <x-status-badge :status="$booking->status" />
+                    <p class="font-medium tabular-nums">{{ config('hms.currency_symbol') }}{{ number_format($booking->total_amount, 0) }} <span class="text-sm font-normal text-slate">at the desk</span></p>
                 </div>
-            </div>
+            </li>
         @endforeach
-    </div>
+    </ul>
 @endif

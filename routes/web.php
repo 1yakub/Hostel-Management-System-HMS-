@@ -23,10 +23,9 @@ Route::post('/book-now', [GuestBookingController::class, 'store'])->name('guest.
 Route::middleware(['auth', 'verified'])->group(function () {
     // Guest Dashboard
     Route::get('/dashboard', function () {
-        if (auth()->user()->is_staff) {
-            return redirect()->route('staff.dashboard');
-        }
-        return view('guest.dashboard');
+        return auth()->user()->is_staff
+            ? redirect()->route('staff.dashboard')
+            : view('guest.dashboard');
     })->name('dashboard');
 
     Route::get('/my-bookings', [GuestBookingController::class, 'index'])->name('guest.bookings');

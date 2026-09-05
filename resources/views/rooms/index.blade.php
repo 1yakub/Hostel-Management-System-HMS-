@@ -1,68 +1,39 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Rooms') }}
-            </h2>
-            <a href="{{ route('rooms.create') }}"
-                class="inline-flex items-center px-4 py-2 bg-luxury-600 dark:bg-luxury-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-luxury-700 dark:hover:bg-luxury-600 transition ease-in-out duration-150">
-                Add New Room
-            </a>
-        </div>
+        <h1 class="text-2xl font-semibold tracking-tight">Rooms</h1>
+        <a href="{{ route('rooms.create') }}" class="rounded-control bg-ink px-4 py-2 text-sm font-medium text-chalk hover:bg-ink-2">Add room</a>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xs sm:rounded-lg">
-                <div class="p-6">
-                    <!-- Room Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        @foreach ($rooms as $room)
-                            <div
-                                class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden border border-luxury-200 dark:border-luxury-700">
-                                <div class="p-6">
-                                    <div class="flex justify-between items-start">
-                                        <div>
-                                            <h3 class="text-xl font-semibold text-luxury-800 dark:text-luxury-200">
-                                                Room {{ $room->room_number }}
-                                            </h3>
-                                            <p class="text-luxury-600/70 dark:text-luxury-400/70 mt-1">
-                                                Capacity: {{ $room->capacity }} persons
-                                            </p>
-                                        </div>
-                                        <span @class([
-                                            'px-3 py-1 rounded-full text-sm font-medium',
-                                            'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' =>
-                                                $room->status === 'available',
-                                            'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' =>
-                                                $room->status === 'occupied',
-                                        ])>
-                                            {{ ucfirst($room->status) }}
-                                        </span>
-                                    </div>
-
-                                    <div class="mt-4">
-                                        <p class="text-2xl font-bold text-luxury-600 dark:text-luxury-400">
-                                            ${{ number_format($room->price_per_night, 2) }}
-                                            <span
-                                                class="text-sm font-normal text-luxury-600/70 dark:text-luxury-400/70">
-                                                / night
-                                            </span>
-                                        </p>
-                                    </div>
-
-                                    <div class="mt-6 flex justify-end">
-                                        <a href="{{ route('rooms.show', $room) }}"
-                                            class="inline-flex items-center px-4 py-2 bg-luxury-600 dark:bg-luxury-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-luxury-700 dark:hover:bg-luxury-600 transition ease-in-out duration-150">
-                                            View Details
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+    @if ($rooms->isEmpty())
+        <x-empty-state title="No rooms yet" action="Add the first room" :href="route('rooms.create')">Rooms and dorm beds appear on the public site as soon as they are added.</x-empty-state>
+    @else
+        <x-panel class="p-0 md:p-0">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="text-left text-slate">
+                        <tr class="border-b border-rule">
+                            <th class="px-5 py-3 font-medium">Room</th>
+                            <th class="px-5 py-3 font-medium">Type</th>
+                            <th class="px-5 py-3 font-medium">Sleeps</th>
+                            <th class="px-5 py-3 font-medium">Status</th>
+                            <th class="px-5 py-3 text-right font-medium">Per night</th>
+                            <th class="px-5 py-3"><span class="sr-only">Actions</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-rule">
+                        @foreach ($rooms->sortBy('room_number') as $room)
+                            <tr class="hover:bg-chalk">
+                                <td class="px-5 py-3 font-medium"><a href="{{ route('rooms.show', $room) }}" class="hover:text-fern-600">{{ $room->room_number }}</a></td>
+                                <td class="px-5 py-3">{{ $room->room_type }}</td>
+                                <td class="px-5 py-3">{{ $room->capacity }}</td>
+                                <td class="px-5 py-3"><x-status-badge :status="$room->status" /></td>
+                                <td class="px-5 py-3 text-right tabular-nums">{{ config('hms.currency_symbol') }}{{ number_format($room->price_per_night, 0) }}</td>
+                                <td class="px-5 py-3 text-right"><a href="{{ route('rooms.edit', $room) }}" class="text-slate hover:text-fern-600">Edit</a></td>
+                            </tr>
                         @endforeach
-                    </div>
-                </div>
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </div>
+        </x-panel>
+    @endif
 </x-app-layout>
