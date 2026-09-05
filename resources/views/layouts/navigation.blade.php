@@ -3,7 +3,7 @@
     <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3">
         <div class="flex items-center gap-8">
             <a href="{{ $staff ? route('staff.dashboard') : route('dashboard') }}" class="flex items-center gap-3">
-                <span aria-hidden="true" class="grid size-9 place-items-center rounded-control bg-ink text-chalk font-semibold">{{ mb_substr(config('app.name'), 0, 1) }}</span>
+                <img src="{{ asset('brand/mark-fern.svg') }}" alt="" width="40" height="36" class="h-9 w-10">
                 <span class="font-semibold tracking-tight">{{ config('app.name') }} <span class="font-normal text-slate">{{ $staff ? 'desk' : 'guest' }}</span></span>
             </a>
             <div class="hidden items-center gap-1 sm:flex">

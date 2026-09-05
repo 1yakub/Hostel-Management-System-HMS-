@@ -22,8 +22,9 @@ FROM --platform=$BUILDPLATFORM node:22-bookworm-slim AS assets
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund
-# Tailwind scans these paths for class names. Every @source path in app.css must exist here,
-# including the framework pagination views, or the scan yields no utilities at all.
+# Everything the CSS build reads: postcss.config.js switches Tailwind on (without it Vite only
+# inlines the theme and no utilities are generated), and every @source path in app.css must
+# exist here, including the framework pagination views. The size test below guards both.
 COPY resources ./resources
 COPY app ./app
 COPY public ./public

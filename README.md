@@ -1,391 +1,154 @@
-# Hostel Management System (HMS)
+# Hostel Management System
 
-[![Laravel](https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
-[![MySQL](https://img.shields.io/badge/MySQL-5.7+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+A Laravel application that runs a small hostel: a public site with live availability and
+booking requests, a front desk for staff, a guest area, and a website assistant that
+answers questions from the hostel's own data.
 
-[![Tests](https://img.shields.io/github/actions/workflow/status/1yakub/Hostel-Management-System-HMS-/laravel.yml?style=for-the-badge&logo=github&logoColor=white&label=Tests)](https://github.com/1yakub/Hostel-Management-System-HMS-/actions/workflows/laravel.yml)
-[![Deployment](https://img.shields.io/github/actions/workflow/status/1yakub/Hostel-Management-System-HMS-/deploy.yml?style=for-the-badge&logo=rocket&logoColor=white&label=Deploy)](https://github.com/1yakub/Hostel-Management-System-HMS-/actions/workflows/deploy.yml)
+Live demo: **[hms.yakubhossain.dev](https://hms.yakubhossain.dev)**. The demo runs as the
+fictional Copperline Hostel. Bookings are requests only, nothing is charged, and the
+database resets every night.
 
-## 🚀 Live Demo
+![Home page](screenshots/home.png)
 
-**✨ [View Live Demo](https://hms.yakub.website/) ✨**
+## What it does
 
-> **🌐 Custom Domain:** `hms.yakub.website` (Professional subdomain)  
-> **🔒 SSL Certificate:** HTTPS enabled for secure access
+**Public site**
 
-### Demo Credentials:
-- **Staff Login:** `staff@example.com` / `password`  
-- **Guest Login:** `guest@example.com` / `password`
-- **Test User:** `test@example.com` / `password`
+- Live availability search: check in, check out and party size, checked against real
+  bookings with overlap logic. Free bed counts on the home page come from the database.
+- Room types grouped from the room table: dorm beds, private doubles, a family room.
+- Booking requests. A visitor makes an account, requests a stay, and sees its status.
+- Questions people ask, hours, address and contact from one configuration file.
+- "Ask the desk", a website assistant. It answers questions about beds, prices and the
+  house with read only tools. It cannot book, change or delete anything.
 
----
+**Front desk**
 
-A comprehensive web-based hostel management solution developed during an internship at Varygen Corp Ltd. This system streamlines hostel operations through automated booking management, room tracking, and integrated payment processing.
+- Dashboard with live counts: guests in house, arrivals today, departures today, free beds.
+- Rooms: create, edit, status, featured photo.
+- Bookings: create for a party, confirm, check in, check out. Capacity and overlap are
+  checked before a booking is saved. A checkout completes the whole party and frees the
+  room only when nothing else occupies it that day.
+- Guests: records linked to user accounts when the guest booked through the site.
 
-## 🏢 Project Overview
+**Guest area**
 
-**Developer:** Md Yakub Hossain  
-**Student ID:** 1830968  
-**Institution:** Independent University, Bangladesh  
-**Company:** Varygen Corp Ltd  
-**Duration:** Spring 2025 (3 months)  
-**Academic Supervisor:** Razib Hayat Khan, Ph.D.  
-**Industry Supervisor:** Bimasha Zaman (CEO, Varygen Corp Ltd)
+- My bookings, one booking request form that pre fills from the search, and the profile
+  pages from Laravel Breeze.
 
-## 📋 Table of Contents
+## Stack
 
-- [Live Demo](#-live-demo)
-- [Features](#-features)
-- [Technology Stack](#️-technology-stack)
-- [System Architecture](#️-system-architecture)
-- [Prerequisites](#-prerequisites)
-- [Installation](#-installation)
-- [Deployment](#-deployment)
-- [User Roles & Access](#-user-roles--access)
-- [Testing](#-testing)
-- [Performance Metrics](#-performance-metrics)
-- [Security Features](#-security-features)
-- [Screenshots](#-screenshots)
-- [Future Enhancements](#-future-enhancements)
-- [Contact](#-contact)
+| Layer | Choice |
+| --- | --- |
+| Framework | Laravel 13, PHP 8.4 |
+| Front end | Blade, Tailwind CSS 4, Alpine.js 3, Vite 8 |
+| Authentication | Laravel Breeze |
+| Assistant | Laravel AI SDK with the OpenAI compatible driver against Vertex AI |
+| Database | PostgreSQL in production, SQLite for local work and tests |
+| Runtime | serversideup/php 8.4 (nginx and php-fpm) |
+| Hosting | Docker image on GHCR, deployed by Coolify |
 
-## ✨ Features
+One typeface (Figtree), one colour system, one set of Blade components for site and desk.
+The rules are written down in [docs/design-system.md](docs/design-system.md).
 
-### 🔐 Authentication & Authorization
-- Secure user authentication with Laravel Breeze
-- Role-based access control (Admin, Staff, Guest)
-- Password reset and email verification
-- Session management with timeout
+## The assistant, and how it is kept safe
 
-### 🏠 Room Management
-- Real-time room inventory tracking
-- Dynamic pricing and availability updates
-- Room maintenance status management
-- Amenities tracking through JSON storage
-- Room type categorization
+The assistant is the only part of the application that spends money, so it has the most
+guards.
 
-### 📅 Booking System
-- Advanced booking management with date validation
-- Check-in/check-out processing
-- Room availability checking
-- Booking modification and cancellation
-- Special requests handling
+- **Credentials stay out of the browser and the repository.** A Google service account with
+  one role (`roles/aiplatform.user`) is mounted as a file outside the image. The server
+  mints a short lived access token from it and caches the token for fifty minutes.
+- **Read only tools.** The model can call three functions: check availability, list room
+  types, read hostel facts. There is no tool that writes.
+- **Four layers of limits.** A per address throttle (6 requests a minute, 12 in ten
+  minutes), a per session daily cap (30 answers), a site wide daily cap (400 answers),
+  and a hard limit on input length (500 characters), output length (600 tokens) and tool
+  steps (3). When a cap is reached the widget shows a plain message. No stack trace, no
+  provider error ever reaches the visitor.
+- **Automatic failover.** Two models are configured on the same endpoint. If the first
+  one is rate limited or errors, the SDK retries with the second.
+- **Text only rendering.** Answers are rendered as text. Nothing the model returns is
+  treated as HTML.
+- **Short memory.** Six turns of history per session, in the server session, never in the
+  browser.
 
-### 💳 Payment Processing
-- Secure payment tracking and verification
-- Automated invoice generation
-- Payment history maintenance
-- Financial transaction reporting
+Provider, models and limits live in `config/ai.php` and `config/hms.php`. Set
+`HMS_ASSISTANT_ENABLED=false` to remove the widget and the route.
 
-### 👥 Guest Management
-- Guest registration and profiling
-- Document verification system
-- Contact information management
-- Guest history tracking
+## Run it locally
 
-### 📊 Reporting & Analytics
-- Occupancy and revenue reports
-- Performance metrics dashboard
-- Business intelligence features
-- Real-time operational statistics
+Requirements: PHP 8.4, Composer, Node 22, or Docker.
 
-## 🛠️ Technology Stack
-
-### Backend
-- **Framework:** Laravel 11.x
-- **Language:** PHP 8.2+
-- **Database:** MySQL/SQLite
-- **ORM:** Eloquent
-- **Authentication:** Laravel Breeze
-
-### Frontend
-- **Markup:** HTML5
-- **Styling:** Tailwind CSS with custom luxury theme
-- **Scripting:** JavaScript, Alpine.js
-- **Build Tool:** Vite
-- **Responsive Design:** Mobile-first approach
-
-### Development Tools
-- **Dependency Management:** Composer, npm
-- **Version Control:** Git
-- **Testing:** PHPUnit
-- **CI/CD:** GitHub Actions (auto-testing and deployment)
-- **Code Standards:** PSR-12
-
-## 🏗️ System Architecture
-
-The HMS follows a modern MVC architecture pattern:
-
-- **Model Layer:** Database interactions and business logic using Eloquent ORM
-- **View Layer:** Blade templates with responsive Tailwind CSS components
-- **Controller Layer:** RESTful controllers for request handling
-
-### Key Design Patterns
-- MVC (Model-View-Controller)
-- Repository Pattern through Eloquent
-- Middleware Pattern for authentication
-- Dependency Injection via Laravel's service container
-
-## 📋 Prerequisites
-
-- PHP >= 8.2
-- Composer
-- Node.js & npm
-- MySQL >= 5.7 (or SQLite for development)
-- Web server (Apache/Nginx)
-
-## 🚀 Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/1yakub/Hostel-Management-System-HMS-.git
-   cd Hostel-Management-System-HMS-
-   ```
-
-2. **Install PHP dependencies**
-   ```bash
-   composer install
-   ```
-
-3. **Install Node.js dependencies**
-   ```bash
-   npm install
-   ```
-
-4. **Environment setup**
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
-
-5. **Configure database**
-   
-   For MySQL:
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=hostel_management
-   DB_USERNAME=your_username
-   DB_PASSWORD=your_password
-   ```
-   
-   For SQLite (default):
-   ```env
-   DB_CONNECTION=sqlite
-   DB_DATABASE=/absolute/path/to/database/database.sqlite
-   ```
-
-6. **Run migrations and seeders**
-   ```bash
-   php artisan migrate --seed
-   ```
-
-7. **Build frontend assets**
-   ```bash
-   npm run build
-   ```
-
-8. **Start the development server**
-   ```bash
-   php artisan serve
-   ```
-
-Visit `http://localhost:8000` to access the application.
-
-## 🚀 Deployment
-
-This project includes automatic deployment to production. When you push to the main branch:
-
-1. **Tests run automatically** (25 tests, takes ~3 minutes)
-2. **If tests pass**, the code deploys to the live server automatically
-3. **Website updates** without any manual work
-
-The deployment handles composer updates, asset building, database migrations, and server restart. Pretty neat for a student project! 
-
-**Live demo:** https://hms.yakub.website
-
-### Manual Deployment (if needed)
 ```bash
-# SSH to your server
-ssh user@your-server
-
-# Pull changes and update
-git pull origin main
-composer install --no-dev
-npm run build
-php artisan migrate --force
+git clone https://github.com/1yakub/Hostel-Management-System-HMS-.git hms
+cd hms
+cp .env.example .env
+composer install
+npm install && npm run build
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate --seed
+php artisan serve
 ```
 
-## 👤 User Roles & Access
+Open http://127.0.0.1:8000. The seed creates the demo hostel, nine rooms, six guests and
+nine bookings around today's date. Demo sign ins are printed by the seeder; the password
+comes from `HMS_DEMO_PASSWORD` in `.env`.
 
-### Administrator
-- Complete system oversight
-- User management
-- Financial reporting
-- System configuration
+The assistant needs a Vertex AI project and a service account key. Set `VERTEX_OPENAI_URL`,
+`VERTEX_SA_KEY_PATH` (or `VERTEX_SA_KEY_BASE64`) and keep `HMS_ASSISTANT_ENABLED=true`.
+Without a key the rest of the site runs normally and the widget is hidden.
 
-### Staff Members
-- Daily operational management
-- Guest service coordination
-- Room and facility maintenance
-- Booking management
+## Tests
 
-### Guests
-- Online booking and payment
-- Service requests
-- Stay management
-- Profile updates
-
-## 🧪 Testing
-
-Run the test suite:
 ```bash
 php artisan test
 ```
 
-### Test Coverage
-- Authentication testing
-- Room management operations
-- Booking system functionality
-- Payment processing
-- API endpoints
+Forty feature tests run against an in memory SQLite database: availability and overlap
+rules, desk booking rules, checkout, guest linking, the assistant's caps and input limits,
+and the disabled mode.
 
-## 🔄 CI/CD Pipeline
+## Deploy
 
-This project includes automated GitHub Actions workflow that:
+The repository builds a production image on every push to `main`:
 
-- ✅ **Runs automatically** on every push/pull request to `main`
-- 🐘 **Tests with PHP 8.2** and Laravel 11
-- 🗃️ **Uses SQLite** for fast testing
-- 📦 **Installs dependencies** (Composer & NPM)
-- 🧪 **Executes all tests** (PHPUnit/Pest)
-- 🎨 **Builds frontend assets** (Vite/Tailwind)
-- 📊 **Reports status** via GitHub badge
+1. `Tests` runs the suite on PHP 8.4.
+2. `Build and push image` builds a multi architecture image (arm64 and amd64) from the
+   `Dockerfile` and pushes it to `ghcr.io/1yakub/hms`.
+3. `Deploy` asks Coolify to pull the new image and restart.
 
-**View CI/CD Results:** [GitHub Actions](https://github.com/1yakub/Hostel-Management-System-HMS-/actions)
+The image runs as `www-data`, with opcache on, and at boot it caches configuration,
+routes and views and runs migrations. Configuration comes from environment variables, the
+service account key from a file mount at `/run/secrets/vertex-sa.json`. Behind the
+platform proxy the application trusts forwarded headers so it sees `https` and the real
+client address.
 
-## 📊 Performance Metrics
+For a different host: build with `docker build -t hms .`, run with the variables from
+`.env.example`, point `DB_*` at PostgreSQL, and mount the key file.
 
-- **Response Time:** < 2 seconds average page load
-- **Concurrent Users:** Successfully tested with 100+ simultaneous users
-- **Database Operations:** < 100ms average query execution
-- **API Response:** < 200ms REST endpoint response time
+## Repository layout
 
-## 🔒 Security Features
+```
+app/Ai/            the assistant agent and its three tools
+app/Support/       Availability (overlap logic), VertexToken (token minting)
+app/Http/          controllers for the site, the desk, the guest area, the assistant
+config/hms.php     hostel facts, FAQ, assistant limits
+database/          migrations and the demo seeders
+docs/              design system
+resources/views/   Blade: site layout, desk layout, components
+tests/Feature/     the test suite
+```
 
-- XSS protection
-- CSRF token verification
-- SQL injection prevention
-- Role-based access control
-- Data encryption for sensitive information
-- Session security with timeout
+## History
 
-## 📱 Screenshots
+The first version was written in 2025 as an internship project. In September 2026 it was
+rebuilt: framework and tooling brought current, the data model corrected (bookings now
+belong to guests), availability and capacity rules added with tests, the public site and
+the desk redesigned on one design system, the assistant added, and the deployment moved to
+a container image.
 
-<div align="center">
+## License
 
-### 🏠 Landing Page
-![HMS Landing Page](screenshots/landing_page.png)
-*Modern, responsive landing page with room showcase and booking interface*
-
-### 📊 Staff Dashboard
-![Staff Dashboard](screenshots/admin_dashboard.png)
-*Comprehensive dashboard with real-time statistics and quick actions*
-
-### 🏨 Room Management
-![Room Management](screenshots/room_management.png)
-*Intuitive room management interface with status tracking*
-
-### 📅 Booking Interface
-![Booking Interface](screenshots/booking_interface.png)
-*User-friendly booking system with date validation and room selection*
-
-</div>
-
-## 🚧 Future Enhancements
-
-### Technical Improvements
-- [ ] Mobile application development (iOS/Android)
-- [ ] AI-powered room recommendations
-- [ ] Advanced analytics with predictive modeling
-- [ ] Real-time chat support
-- [ ] Third-party booking platform integration
-
-### Business Features
-- [ ] Loyalty program integration
-- [ ] Dynamic pricing system
-- [ ] Multi-language support
-- [ ] Advanced reporting tools
-
-## 📄 Project Documentation
-
-For detailed technical documentation, please refer to the [full internship report](docs/1830968_hms_report.pdf).
-
-## 🤝 Contributing
-
-This project was developed as part of an academic internship. For educational purposes and learning:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is developed for academic and learning purposes. Please contact the author for usage permissions.
-
-## 📞 Contact
-
-<div align="center">
-
-### 👨‍💻 **Md Yakub Hossain**
-*Computer Science & Engineering Student*  
-*Independent University, Bangladesh*
-
-[![Email](https://img.shields.io/badge/Email-1830968@iub.edu.bd-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:1830968@iub.edu.bd)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-yakubhossain-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yakubhossain)
-[![GitHub](https://img.shields.io/badge/GitHub-1yakub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/1yakub)
-
----
-
-### 👨‍🏫 **Academic Supervisor**
-**Razib Hayat Khan, Ph.D.**  
-Associate Professor, CSE Department  
-Independent University, Bangladesh
-
----
-
-### 👩‍💼 **Industry Supervisor**
-**Bimasha Zaman**  
-CEO, Varygen Corp Ltd
-
-</div>
-
-## 🙏 Acknowledgments
-
-- **Varygen Corp Ltd** for providing the internship opportunity
-- **Bimasha Zaman** (CEO, Varygen Corp Ltd) for industry guidance and mentorship
-- **Razib Hayat Khan, Ph.D.** for academic supervision and support
-- **Independent University, Bangladesh** for academic framework and resources
-- **Department of Computer Science & Engineering** for comprehensive education
-
-## 📈 Project Stats
-
-![GitHub repo size](https://img.shields.io/github/repo-size/1yakub/Hostel-Management-System-HMS-)
-![GitHub last commit](https://img.shields.io/github/last-commit/1yakub/Hostel-Management-System-HMS-)
-![GitHub issues](https://img.shields.io/github/issues/1yakub/Hostel-Management-System-HMS-)
-![GitHub stars](https://img.shields.io/github/stars/1yakub/Hostel-Management-System-HMS-)
-
----
-
-<div align="center">
-
-**⭐ Star this repository if you found it helpful!**
-
-*This system was developed as part of an undergraduate internship program and demonstrates the practical application of modern web development technologies in solving real-world business challenges.*
-
-</div>
+MIT. See [LICENSE](LICENSE).

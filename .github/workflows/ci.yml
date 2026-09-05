@@ -80,5 +80,5 @@ jobs:
     steps:
       - name: Ask Coolify to pull and restart
         run: |
-          curl --fail --silent --show-error -X GET "${{ secrets.COOLIFY_DEPLOY_URL }}" \
+          curl --fail --silent --show-error -X POST "${{ secrets.COOLIFY_DEPLOY_URL }}" \
             -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}"
