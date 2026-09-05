@@ -37,6 +37,7 @@ return [
 
     'vertex' => [
         'key_path' => env('VERTEX_SA_KEY_PATH'),
+        'key_base64' => env('VERTEX_SA_KEY_BASE64'),
     ],
 
 ];

@@ -18,15 +18,9 @@ class VertexToken
     public static function get(): string
     {
         return Cache::remember(self::CACHE_KEY, now()->addMinutes(50), function () {
-            $path = config('services.vertex.key_path');
-
-            if (! $path || ! is_readable($path)) {
-                throw new RuntimeException('Vertex service account key is not configured.');
-            }
-
             $credentials = new ServiceAccountCredentials(
                 ['https://www.googleapis.com/auth/cloud-platform'],
-                json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR),
+                self::keyJson(),
             );
 
             $token = $credentials->fetchAuthToken();
@@ -37,6 +31,34 @@ class VertexToken
 
             return $token['access_token'];
         });
+    }
+
+    /**
+     * The key comes from a file mounted outside the image (VERTEX_SA_KEY_PATH) or, where a
+     * file mount is not available, from a base64 encoded environment value. Either way it
+     * never sits in the repository or the image.
+     */
+    private static function keyJson(): array
+    {
+        $path = config('services.vertex.key_path');
+
+        if ($path && is_readable($path)) {
+            return json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+        }
+
+        $encoded = config('services.vertex.key_base64');
+
+        if ($encoded) {
+            $decoded = base64_decode($encoded, true);
+
+            if ($decoded === false) {
+                throw new RuntimeException('Vertex service account key is not valid base64.');
+            }
+
+            return json_decode($decoded, true, 512, JSON_THROW_ON_ERROR);
+        }
+
+        throw new RuntimeException('Vertex service account key is not configured.');
     }
 
     public static function forget(): void
