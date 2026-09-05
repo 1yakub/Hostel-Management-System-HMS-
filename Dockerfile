@@ -2,16 +2,21 @@
 # Production image for the Hostel Management System.
 # Three stages: PHP dependencies, front end assets, then the runtime on serversideup/php
 # (nginx + php-fpm, unprivileged www-data, health check and Laravel automations built in).
+# The two dependency stages build on the builder's own platform: their output is
+# architecture independent, so composer and node never run under emulation.
 
 ARG PHP_VERSION=8.4
-ARG BUILDPLATFORM
 
 FROM --platform=$BUILDPLATFORM serversideup/php:${PHP_VERSION}-cli AS vendor
+# build stage only: root so copied files can be arranged; the runtime stage runs as www-data
+USER root
 WORKDIR /app
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-interaction --no-progress --no-scripts --prefer-dist --optimize-autoloader
 COPY . .
-RUN composer dump-autoload --no-dev --optimize --classmap-authoritative
+# package discovery (a composer script) writes bootstrap/cache/packages.php
+RUN mkdir -p bootstrap/cache storage/logs storage/framework/cache storage/framework/sessions storage/framework/views \
+    && composer dump-autoload --no-dev --optimize --classmap-authoritative
 
 FROM --platform=$BUILDPLATFORM node:22-alpine AS assets
 WORKDIR /app
