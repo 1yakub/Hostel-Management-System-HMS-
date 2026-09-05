@@ -133,12 +133,12 @@
             <div class="relative">
                 @if (Route::has('login'))
                     <nav
-                        class="fixed w-full z-50 backdrop-blur-sm bg-white/80 dark:bg-gray-900/80 border-b border-luxury-200/50 dark:border-luxury-800/50 shadow-sm">
+                        class="fixed w-full z-50 backdrop-blur-xs bg-white/80 dark:bg-gray-900/80 border-b border-luxury-200/50 dark:border-luxury-800/50 shadow-xs">
                         <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
                             <div class="flex justify-between h-20">
                                 <!-- Logo and Brand -->
                                 <div class="flex items-center space-x-4">
-                                    <div class="flex-shrink-0">
+                                    <div class="shrink-0">
                                         <div
                                             class="w-12 h-12 rounded-full bg-luxury-800 dark:bg-luxury-700 flex items-center justify-center">
                                             <span class="font-serif text-2xl font-bold text-white">
@@ -188,7 +188,7 @@
 
                                             @if (Route::has('register'))
                                                 <a href="{{ route('guest.booking.create') }}"
-                                                    class="inline-flex items-center px-4 py-2 bg-luxury-800 dark:bg-luxury-700 text-white font-medium rounded-lg hover:bg-luxury-900 dark:hover:bg-luxury-600 transition-colors shadow-sm">
+                                                    class="inline-flex items-center px-4 py-2 bg-luxury-800 dark:bg-luxury-700 text-white font-medium rounded-lg hover:bg-luxury-900 dark:hover:bg-luxury-600 transition-colors shadow-xs">
                                                     <span>Book Now</span>
                                                     <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -200,7 +200,7 @@
 
                                         <!-- Dark Mode Toggle -->
                                         <button type="button" data-dark-toggle aria-label="Switch to dark mode"
-                                            class="w-10 h-10 rounded-lg bg-luxury-50 dark:bg-gray-800 flex items-center justify-center text-luxury-800 dark:text-luxury-200 hover:bg-luxury-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400">
+                                            class="w-10 h-10 rounded-lg bg-luxury-50 dark:bg-gray-800 flex items-center justify-center text-luxury-800 dark:text-luxury-200 hover:bg-luxury-100 dark:hover:bg-gray-700 transition-colors focus:outline-hidden focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400">
                                             <span class="sr-only">Toggle dark mode</span>
                                             <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
@@ -217,7 +217,7 @@
 
                                     <!-- Mobile Menu Button -->
                                     <button type="button" data-mobile-menu
-                                        class="md:hidden w-10 h-10 flex items-center justify-center text-luxury-800 dark:text-luxury-200 hover:bg-luxury-50 dark:hover:bg-gray-800 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400"
+                                        class="md:hidden w-10 h-10 flex items-center justify-center text-luxury-800 dark:text-luxury-200 hover:bg-luxury-50 dark:hover:bg-gray-800 rounded-lg transition-colors focus:outline-hidden focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400"
                                         aria-label="Toggle mobile menu">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path class="mobile-menu-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -256,7 +256,7 @@
                             <div class="flex flex-wrap gap-6">
                                 @auth
                                     {{-- <a href="{{ route('dashboard') }}"
-                                        class="inline-flex items-center px-8 py-3 bg-luxury-800 dark:bg-luxury-700 text-white font-semibold rounded-lg hover:bg-luxury-900 dark:hover:bg-luxury-600 transition-colors shadow-sm">
+                                        class="inline-flex items-center px-8 py-3 bg-luxury-800 dark:bg-luxury-700 text-white font-semibold rounded-lg hover:bg-luxury-900 dark:hover:bg-luxury-600 transition-colors shadow-xs">
                                         <span>View Dashboard</span>
                                         <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -265,7 +265,7 @@
                                     </a> --}}
                                 @else
                                     <a href="{{ route('register') }}"
-                                        class="inline-flex items-center px-8 py-3 bg-luxury-800 dark:bg-luxury-700 text-white font-semibold rounded-lg hover:bg-luxury-900 dark:hover:bg-luxury-600 transition-colors shadow-sm">
+                                        class="inline-flex items-center px-8 py-3 bg-luxury-800 dark:bg-luxury-700 text-white font-semibold rounded-lg hover:bg-luxury-900 dark:hover:bg-luxury-600 transition-colors shadow-xs">
                                         <span>Book Now</span>
                                         <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -273,7 +273,7 @@
                                         </svg>
                                     </a>
                                     <a href="{{ route('login') }}"
-                                        class="inline-flex items-center px-8 py-3 bg-white dark:bg-gray-800 text-luxury-800 dark:text-luxury-200 font-semibold rounded-lg hover:bg-luxury-50 dark:hover:bg-gray-700 transition-colors shadow-sm">
+                                        class="inline-flex items-center px-8 py-3 bg-white dark:bg-gray-800 text-luxury-800 dark:text-luxury-200 font-semibold rounded-lg hover:bg-luxury-50 dark:hover:bg-gray-700 transition-colors shadow-xs">
                                         Sign In
                                     </a>
                                 @endauth
@@ -284,14 +284,14 @@
                         <div class="grid sm:grid-cols-2 gap-6">
                             @if ($stats ?? null)
                                 <div
-                                    class="bg-white/90 dark:bg-gray-800/90 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                    class="bg-white/90 dark:bg-gray-800/90 p-8 rounded-xl shadow-xs hover:shadow-md transition-shadow">
                                     <div class="text-4xl font-bold text-luxury-800 dark:text-luxury-200 mb-2">
                                         {{ $stats['roomCount'] ?? 0 }}+
                                     </div>
                                     <p class="text-luxury-600 dark:text-luxury-400">Luxury Rooms</p>
                                 </div>
                                 <div
-                                    class="bg-white/90 dark:bg-gray-800/90 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                    class="bg-white/90 dark:bg-gray-800/90 p-8 rounded-xl shadow-xs hover:shadow-md transition-shadow">
                                     <div class="text-4xl font-bold text-luxury-800 dark:text-luxury-200 mb-2">
                                         {{ $stats['guestCount'] ?? 0 }}+
                                     </div>
@@ -319,7 +319,7 @@
 
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         @foreach ($roomTypes as $type)
-                            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+                            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xs overflow-hidden">
                                 <div class="aspect-w-16 aspect-h-9">
                                     <img src="{{ $type['image'] ?? 'https://via.placeholder.com/800x600' }}"
                                         alt="{{ $type['name'] }}" class="object-cover w-full h-full">
@@ -360,7 +360,7 @@
 
                 <!-- Cards -->
                 <div class="grid sm:grid-cols-2 gap-6">
-                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-xs hover:shadow-md transition-shadow">
                         <div
                             class="w-14 h-14 bg-luxury-800 dark:bg-luxury-700 rounded-lg flex items-center justify-center mb-6">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -373,7 +373,7 @@
                             meticulously designed rooms.</p>
                     </div>
 
-                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-xs hover:shadow-md transition-shadow">
                         <div
                             class="w-14 h-14 bg-luxury-800 dark:bg-luxury-700 rounded-lg flex items-center justify-center mb-6">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -387,7 +387,7 @@
                             stay.</p>
                     </div>
 
-                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-xs hover:shadow-md transition-shadow">
                         <div
                             class="w-14 h-14 bg-luxury-800 dark:bg-luxury-700 rounded-lg flex items-center justify-center mb-6">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -402,7 +402,7 @@
                         </p>
                     </div>
 
-                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-xs hover:shadow-md transition-shadow">
                         <div
                             class="w-14 h-14 bg-luxury-800 dark:bg-luxury-700 rounded-lg flex items-center justify-center mb-6">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -429,7 +429,7 @@
                         <div class="grid gap-6">
                             <div class="flex items-start space-x-4">
                                 <div
-                                    class="flex-shrink-0 w-12 h-12 bg-luxury-800 dark:bg-luxury-700 rounded-lg flex items-center justify-center">
+                                    class="shrink-0 w-12 h-12 bg-luxury-800 dark:bg-luxury-700 rounded-lg flex items-center justify-center">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -445,7 +445,7 @@
                             </div>
                             <div class="flex items-start space-x-4">
                                 <div
-                                    class="flex-shrink-0 w-12 h-12 bg-luxury-800 dark:bg-luxury-700 rounded-lg flex items-center justify-center">
+                                    class="shrink-0 w-12 h-12 bg-luxury-800 dark:bg-luxury-700 rounded-lg flex items-center justify-center">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -512,7 +512,7 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div class="mobile-menu hidden fixed inset-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm md:hidden">
+    <div class="mobile-menu hidden fixed inset-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xs md:hidden">
         <div class="flex flex-col h-full">
             <!-- Mobile Menu Header -->
             <div class="flex justify-between items-center p-6 border-b border-luxury-200 dark:border-luxury-800">
@@ -532,7 +532,7 @@
                 
                 <!-- Close Button -->
                 <button type="button" data-mobile-menu
-                    class="w-10 h-10 flex items-center justify-center text-luxury-800 dark:text-luxury-200 hover:bg-luxury-50 dark:hover:bg-gray-800 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400"
+                    class="w-10 h-10 flex items-center justify-center text-luxury-800 dark:text-luxury-200 hover:bg-luxury-50 dark:hover:bg-gray-800 rounded-lg transition-colors focus:outline-hidden focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400"
                     aria-label="Close mobile menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -574,7 +574,7 @@
 
                         @if (Route::has('register'))
                             <a href="{{ route('guest.booking.create') }}"
-                                class="block px-4 py-3 mx-4 mt-2 bg-luxury-800 dark:bg-luxury-700 text-white text-center font-semibold rounded-lg hover:bg-luxury-900 dark:hover:bg-luxury-600 transition-colors shadow-sm">
+                                class="block px-4 py-3 mx-4 mt-2 bg-luxury-800 dark:bg-luxury-700 text-white text-center font-semibold rounded-lg hover:bg-luxury-900 dark:hover:bg-luxury-600 transition-colors shadow-xs">
                                 Book Now
                             </a>
                         @endif
@@ -589,8 +589,8 @@
                     
                     <!-- Dark Mode Toggle -->
                     <button type="button" data-dark-toggle aria-label="Switch to dark mode"
-                        class="w-12 h-6 rounded-full bg-luxury-200 dark:bg-luxury-700 relative focus:outline-none focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400 transition-colors">
-                        <div class="w-5 h-5 rounded-full bg-white dark:bg-luxury-200 shadow-sm transform transition-transform translate-x-0.5 dark:translate-x-6 flex items-center justify-center">
+                        class="w-12 h-6 rounded-full bg-luxury-200 dark:bg-luxury-700 relative focus:outline-hidden focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400 transition-colors">
+                        <div class="w-5 h-5 rounded-full bg-white dark:bg-luxury-200 shadow-xs transform transition-transform translate-x-0.5 dark:translate-x-6 flex items-center justify-center">
                             <svg class="w-3 h-3 text-luxury-800 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />

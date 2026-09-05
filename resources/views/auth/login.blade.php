@@ -3,10 +3,10 @@
         class="w-full sm:max-w-md mt-6 px-10 py-10 bg-white/95 dark:bg-gray-800/95 backdrop-blur-2xl shadow-[0_0_40px_rgba(164,126,98,0.12)] dark:shadow-[0_0_40px_rgba(0,0,0,0.25)] rounded-2xl z-10 border border-luxury-200/50 dark:border-luxury-800/50">
         <div class="mb-10 text-center">
             <h2
-                class="font-serif text-4xl font-bold bg-gradient-to-r from-luxury-800 to-accent-800 dark:from-luxury-400 dark:to-accent-400 bg-clip-text text-transparent">
+                class="font-serif text-4xl font-bold bg-linear-to-r from-luxury-800 to-accent-800 dark:from-luxury-400 dark:to-accent-400 bg-clip-text text-transparent">
                 Welcome Back
             </h2>
-            <div class="h-1 w-20 bg-gradient-to-r from-luxury-600 to-accent-600 mx-auto mt-4 rounded-full"></div>
+            <div class="h-1 w-20 bg-linear-to-r from-luxury-600 to-accent-600 mx-auto mt-4 rounded-full"></div>
             <p class="text-sm text-luxury-600/70 dark:text-luxury-400/70 mt-4">
                 Please sign in to your luxury experience
             </p>
@@ -40,7 +40,7 @@
             <div class="flex items-center justify-between">
                 <label for="remember_me" class="inline-flex items-center">
                     <input id="remember_me" type="checkbox"
-                        class="rounded-sm dark:bg-gray-900 border-2 border-luxury-300 dark:border-luxury-700 text-luxury-600 shadow-sm focus:ring-luxury-500 dark:focus:ring-luxury-600 dark:focus:ring-offset-gray-800"
+                        class="rounded-xs dark:bg-gray-900 border-2 border-luxury-300 dark:border-luxury-700 text-luxury-600 shadow-xs focus:ring-luxury-500 dark:focus:ring-luxury-600 dark:focus:ring-offset-gray-800"
                         name="remember">
                     <span class="ml-2 text-sm text-luxury-600/70 dark:text-luxury-400/70">{{ __('Remember me') }}</span>
                 </label>
@@ -55,7 +55,7 @@
 
             <div>
                 <x-primary-button
-                    class="w-full justify-center p-4 text-base bg-gradient-to-r from-luxury-600 to-accent-600 hover:from-luxury-700 hover:to-accent-700">
+                    class="w-full justify-center p-4 text-base bg-linear-to-r from-luxury-600 to-accent-600 hover:from-luxury-700 hover:to-accent-700">
                     {{ __('Sign in') }}
                 </x-primary-button>
             </div>

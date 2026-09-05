@@ -13,7 +13,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xs sm:rounded-lg">
                 <div class="p-6">
                     <form action="{{ route('rooms.store') }}" method="POST" class="space-y-6">
                         @csrf
@@ -42,7 +42,7 @@
                         <div>
                             <x-input-label for="status" value="Status" />
                             <select id="status" name="status"
-                                class="mt-1 block w-full border-luxury-200 dark:border-luxury-700 bg-white/50 dark:bg-gray-900/50 text-luxury-900 dark:text-luxury-100 focus:border-luxury-500 dark:focus:border-luxury-600 focus:ring-luxury-500 dark:focus:ring-luxury-600 rounded-lg shadow-sm">
+                                class="mt-1 block w-full border-luxury-200 dark:border-luxury-700 bg-white/50 dark:bg-gray-900/50 text-luxury-900 dark:text-luxury-100 focus:border-luxury-500 dark:focus:border-luxury-600 focus:ring-luxury-500 dark:focus:ring-luxury-600 rounded-lg shadow-xs">
                                 <option value="available" {{ old('status') == 'available' ? 'selected' : '' }}>Available
                                 </option>
                                 <option value="maintenance" {{ old('status') == 'maintenance' ? 'selected' : '' }}>

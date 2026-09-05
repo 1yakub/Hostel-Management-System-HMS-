@@ -62,7 +62,7 @@
 
 <body class="font-sans antialiased">
     <div
-        class="relative min-h-screen bg-gradient-to-br from-luxury-50 via-white to-luxury-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        class="relative min-h-screen bg-linear-to-br from-luxury-50 via-white to-luxury-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         <!-- Background Pattern -->
         <div class="fixed inset-0 z-0">
             <div class="absolute inset-0 pattern-dots pointer-events-none"></div>
@@ -70,13 +70,13 @@
 
             <!-- Decorative Elements -->
             <div
-                class="absolute -left-48 -top-48 w-96 h-96 rounded-full bg-gradient-to-br from-luxury-200/40 to-luxury-300/40 dark:from-luxury-800/20 dark:to-luxury-900/20 blur-3xl">
+                class="absolute -left-48 -top-48 w-96 h-96 rounded-full bg-linear-to-br from-luxury-200/40 to-luxury-300/40 dark:from-luxury-800/20 dark:to-luxury-900/20 blur-3xl">
             </div>
             <div
-                class="absolute -right-48 -bottom-48 w-96 h-96 rounded-full bg-gradient-to-br from-accent-200/30 to-accent-300/30 dark:from-accent-800/20 dark:to-accent-900/20 blur-3xl">
+                class="absolute -right-48 -bottom-48 w-96 h-96 rounded-full bg-linear-to-br from-accent-200/30 to-accent-300/30 dark:from-accent-800/20 dark:to-accent-900/20 blur-3xl">
             </div>
             <div
-                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-white/10 to-luxury-100/10 dark:from-black/10 dark:to-luxury-900/10 backdrop-blur-3xl">
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-linear-to-br from-white/10 to-luxury-100/10 dark:from-black/10 dark:to-luxury-900/10 backdrop-blur-3xl">
             </div>
         </div>
 
@@ -84,7 +84,7 @@
         <div class="relative z-10">
             <!-- Navigation -->
             <nav
-                class="fixed w-full z-50 bg-white/90 dark:bg-gray-900/90 border-b border-luxury-200/50 dark:border-luxury-800/50 shadow-sm bg-blur">
+                class="fixed w-full z-50 bg-white/90 dark:bg-gray-900/90 border-b border-luxury-200/50 dark:border-luxury-800/50 shadow-xs bg-blur">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
                         <div class="flex items-center">

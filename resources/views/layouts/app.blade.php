@@ -70,7 +70,7 @@
 
 <body class="font-sans antialiased">
     <div
-        class="relative min-h-screen bg-gradient-to-br from-luxury-50 via-white to-luxury-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        class="relative min-h-screen bg-linear-to-br from-luxury-50 via-white to-luxury-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         <!-- Background Pattern -->
         <div class="fixed inset-0 z-0">
             <div class="absolute inset-0 pattern-dots pointer-events-none"></div>
@@ -78,13 +78,13 @@
 
             <!-- Decorative Elements -->
             <div
-                class="absolute -left-48 -top-48 w-96 h-96 rounded-full bg-gradient-to-br from-luxury-200/40 via-gold-300/30 to-luxury-300/40 dark:from-luxury-800/20 dark:via-gold-700/15 dark:to-luxury-900/20 blur-3xl">
+                class="absolute -left-48 -top-48 w-96 h-96 rounded-full bg-linear-to-br from-luxury-200/40 via-gold-300/30 to-luxury-300/40 dark:from-luxury-800/20 dark:via-gold-700/15 dark:to-luxury-900/20 blur-3xl">
             </div>
             <div
-                class="absolute -right-48 -bottom-48 w-96 h-96 rounded-full bg-gradient-to-br from-gold-200/30 via-luxury-300/25 to-gold-300/30 dark:from-gold-800/20 dark:via-luxury-700/15 dark:to-gold-900/20 blur-3xl">
+                class="absolute -right-48 -bottom-48 w-96 h-96 rounded-full bg-linear-to-br from-gold-200/30 via-luxury-300/25 to-gold-300/30 dark:from-gold-800/20 dark:via-luxury-700/15 dark:to-gold-900/20 blur-3xl">
             </div>
             <div
-                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-white/10 via-gold-100/5 to-luxury-100/10 dark:from-black/10 dark:via-gold-900/5 dark:to-luxury-900/10 backdrop-blur-3xl">
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-linear-to-br from-white/10 via-gold-100/5 to-luxury-100/10 dark:from-black/10 dark:via-gold-900/5 dark:to-luxury-900/10 backdrop-blur-3xl">
             </div>
         </div>
 

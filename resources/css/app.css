@@ -1,3 +1,68 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/forms';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-luxury-50: #f9f6f3;
+  --color-luxury-100: #f3ede7;
+  --color-luxury-200: #e7dbcf;
+  --color-luxury-300: #dbc9b7;
+  --color-luxury-400: #cfb79f;
+  --color-luxury-500: #c3a587;
+  --color-luxury-600: #b7936f;
+  --color-luxury-700: #8c6d4f;
+  --color-luxury-800: #61472f;
+  --color-luxury-900: #362210;
+
+  --color-gold-50: #fdfaf3;
+  --color-gold-100: #fbf5e7;
+  --color-gold-200: #f7ebcf;
+  --color-gold-300: #f3e1b7;
+  --color-gold-400: #efd79f;
+  --color-gold-500: #ebcd87;
+  --color-gold-600: #e7c36f;
+  --color-gold-700: #bc9441;
+  --color-gold-800: #8c6a23;
+  --color-gold-900: #5c4005;
+
+  --color-accent-50: #f5f3ff;
+  --color-accent-100: #ede9fe;
+  --color-accent-200: #ddd6fe;
+  --color-accent-300: #c4b5fd;
+  --color-accent-400: #a78bfa;
+  --color-accent-500: #8b5cf6;
+  --color-accent-600: #7c3aed;
+  --color-accent-700: #6d28d9;
+  --color-accent-800: #5b21b6;
+  --color-accent-900: #4c1d95;
+  --color-accent-950: #2e1065;
+
+  --font-sans: Montserrat, sans-serif;
+  --font-serif: Playfair Display, serif;
+
+  --shadow-luxury: 0 4px 20px rgba(140, 109, 79, 0.1);
+  --shadow-luxury-lg: 0 10px 30px rgba(140, 109, 79, 0.2);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}

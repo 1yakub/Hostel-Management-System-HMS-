@@ -11,7 +11,7 @@
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                 <!-- Active Bookings -->
                 <div
-                    class="bg-gradient-to-br from-white/95 to-white/50 dark:from-gray-800/90 dark:to-gray-900/50 overflow-hidden shadow-luxury gold-border rounded-lg bg-blur p-6">
+                    class="bg-linear-to-br from-white/95 to-white/50 dark:from-gray-800/90 dark:to-gray-900/50 overflow-hidden shadow-luxury gold-border rounded-lg bg-blur p-6">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm font-medium text-luxury-600 dark:text-gold-400">Active Bookings</p>
@@ -21,7 +21,7 @@
                                 checkouts today</p>
                         </div>
                         <div
-                            class="p-3 bg-gradient-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full">
+                            class="p-3 bg-linear-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full">
                             <svg class="w-6 h-6 text-luxury-700 dark:text-gold-400" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -33,7 +33,7 @@
 
                 <!-- Available Rooms -->
                 <div
-                    class="bg-gradient-to-br from-white/95 to-white/50 dark:from-gray-800/90 dark:to-gray-900/50 overflow-hidden shadow-luxury gold-border rounded-lg bg-blur p-6">
+                    class="bg-linear-to-br from-white/95 to-white/50 dark:from-gray-800/90 dark:to-gray-900/50 overflow-hidden shadow-luxury gold-border rounded-lg bg-blur p-6">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm font-medium text-luxury-600 dark:text-gold-400">Available Rooms</p>
@@ -43,7 +43,7 @@
                                 occupancy rate</p>
                         </div>
                         <div
-                            class="p-3 bg-gradient-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full">
+                            class="p-3 bg-linear-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full">
                             <svg class="w-6 h-6 text-luxury-700 dark:text-gold-400" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -55,7 +55,7 @@
 
                 <!-- Total Guests -->
                 <div
-                    class="bg-gradient-to-br from-white/95 to-white/50 dark:from-gray-800/90 dark:to-gray-900/50 overflow-hidden shadow-luxury gold-border rounded-lg bg-blur p-6">
+                    class="bg-linear-to-br from-white/95 to-white/50 dark:from-gray-800/90 dark:to-gray-900/50 overflow-hidden shadow-luxury gold-border rounded-lg bg-blur p-6">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm font-medium text-luxury-600 dark:text-gold-400">Total Guests</p>
@@ -65,7 +65,7 @@
                                 new this month</p>
                         </div>
                         <div
-                            class="p-3 bg-gradient-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full">
+                            class="p-3 bg-linear-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full">
                             <svg class="w-6 h-6 text-luxury-700 dark:text-gold-400" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -77,7 +77,7 @@
 
                 <!-- Monthly Revenue -->
                 <div
-                    class="bg-gradient-to-br from-white/95 to-white/50 dark:from-gray-800/90 dark:to-gray-900/50 overflow-hidden shadow-luxury gold-border rounded-lg bg-blur p-6">
+                    class="bg-linear-to-br from-white/95 to-white/50 dark:from-gray-800/90 dark:to-gray-900/50 overflow-hidden shadow-luxury gold-border rounded-lg bg-blur p-6">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm font-medium text-luxury-600 dark:text-gold-400">Monthly Revenue</p>
@@ -87,7 +87,7 @@
                                 last month</p>
                         </div>
                         <div
-                            class="p-3 bg-gradient-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full">
+                            class="p-3 bg-linear-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full">
                             <svg class="w-6 h-6 text-luxury-700 dark:text-gold-400" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -100,21 +100,21 @@
 
             <!-- Room Status Overview -->
             <div
-                class="bg-gradient-to-br from-white/95 to-white/50 dark:from-gray-800/90 dark:to-gray-900/50 overflow-hidden shadow-luxury gold-border rounded-lg bg-blur">
+                class="bg-linear-to-br from-white/95 to-white/50 dark:from-gray-800/90 dark:to-gray-900/50 overflow-hidden shadow-luxury gold-border rounded-lg bg-blur">
                 <div class="p-6">
                     <h3 class="text-lg font-serif font-semibold text-luxury-800 dark:text-gold-300 mb-4">Room Status
                         Overview</h3>
                     <div class="grid gap-4 md:grid-cols-3">
                         <!-- Available -->
                         <div
-                            class="flex items-center justify-between p-4 bg-gradient-to-br from-green-50/50 to-white/30 dark:from-green-900/20 dark:to-gray-800/30 rounded-lg border border-green-200/20 dark:border-green-500/10">
+                            class="flex items-center justify-between p-4 bg-linear-to-br from-green-50/50 to-white/30 dark:from-green-900/20 dark:to-gray-800/30 rounded-lg border border-green-200/20 dark:border-green-500/10">
                             <div>
                                 <p class="text-sm font-medium text-green-700 dark:text-green-400">Available</p>
                                 <p class="text-2xl font-bold text-green-600 dark:text-green-300">
                                     {{ $stats['availableRooms'] }}</p>
                             </div>
                             <div
-                                class="p-2 bg-gradient-to-br from-green-100 to-white dark:from-green-900/30 dark:to-green-900/10 rounded-full">
+                                class="p-2 bg-linear-to-br from-green-100 to-white dark:from-green-900/30 dark:to-green-900/10 rounded-full">
                                 <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -125,14 +125,14 @@
 
                         <!-- Occupied -->
                         <div
-                            class="flex items-center justify-between p-4 bg-gradient-to-br from-blue-50/50 to-white/30 dark:from-blue-900/20 dark:to-gray-800/30 rounded-lg border border-blue-200/20 dark:border-blue-500/10">
+                            class="flex items-center justify-between p-4 bg-linear-to-br from-blue-50/50 to-white/30 dark:from-blue-900/20 dark:to-gray-800/30 rounded-lg border border-blue-200/20 dark:border-blue-500/10">
                             <div>
                                 <p class="text-sm font-medium text-blue-700 dark:text-blue-400">Occupied</p>
                                 <p class="text-2xl font-bold text-blue-600 dark:text-blue-300">
                                     {{ $stats['occupiedRooms'] }}</p>
                             </div>
                             <div
-                                class="p-2 bg-gradient-to-br from-blue-100 to-white dark:from-blue-900/30 dark:to-blue-900/10 rounded-full">
+                                class="p-2 bg-linear-to-br from-blue-100 to-white dark:from-blue-900/30 dark:to-blue-900/10 rounded-full">
                                 <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -143,14 +143,14 @@
 
                         <!-- Maintenance -->
                         <div
-                            class="flex items-center justify-between p-4 bg-gradient-to-br from-amber-50/50 to-white/30 dark:from-amber-900/20 dark:to-gray-800/30 rounded-lg border border-amber-200/20 dark:border-amber-500/10">
+                            class="flex items-center justify-between p-4 bg-linear-to-br from-amber-50/50 to-white/30 dark:from-amber-900/20 dark:to-gray-800/30 rounded-lg border border-amber-200/20 dark:border-amber-500/10">
                             <div>
                                 <p class="text-sm font-medium text-amber-700 dark:text-amber-400">Maintenance</p>
                                 <p class="text-2xl font-bold text-amber-600 dark:text-amber-300">
                                     {{ $stats['maintenanceRooms'] }}</p>
                             </div>
                             <div
-                                class="p-2 bg-gradient-to-br from-amber-100 to-white dark:from-amber-900/30 dark:to-amber-900/10 rounded-full">
+                                class="p-2 bg-linear-to-br from-amber-100 to-white dark:from-amber-900/30 dark:to-amber-900/10 rounded-full">
                                 <svg class="w-5 h-5 text-amber-600 dark:text-amber-400" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -164,15 +164,15 @@
 
             <!-- Quick Actions -->
             <div
-                class="bg-gradient-to-br from-white/95 to-white/50 dark:from-gray-800/90 dark:to-gray-900/50 overflow-hidden shadow-luxury gold-border rounded-lg bg-blur">
+                class="bg-linear-to-br from-white/95 to-white/50 dark:from-gray-800/90 dark:to-gray-900/50 overflow-hidden shadow-luxury gold-border rounded-lg bg-blur">
                 <div class="p-6">
                     <h3 class="text-lg font-serif font-semibold text-luxury-800 dark:text-gold-300 mb-4">Quick Actions
                     </h3>
                     <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
                         <a href="{{ route('rooms.create') }}"
-                            class="flex items-center p-3 bg-gradient-to-br from-luxury-50/50 to-white/30 dark:from-gray-800/50 dark:to-gray-900/30 rounded-lg border border-luxury-200/20 dark:border-gold-500/10 hover:bg-luxury-100/50 dark:hover:bg-gold-900/20 transition-colors group">
+                            class="flex items-center p-3 bg-linear-to-br from-luxury-50/50 to-white/30 dark:from-gray-800/50 dark:to-gray-900/30 rounded-lg border border-luxury-200/20 dark:border-gold-500/10 hover:bg-luxury-100/50 dark:hover:bg-gold-900/20 transition-colors group">
                             <div
-                                class="p-2 bg-gradient-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full mr-3 group-hover:from-luxury-200 dark:group-hover:from-gold-800/30">
+                                class="p-2 bg-linear-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full mr-3 group-hover:from-luxury-200 dark:group-hover:from-gold-800/30">
                                 <svg class="w-5 h-5 text-luxury-700 dark:text-gold-400" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -185,9 +185,9 @@
                         </a>
 
                         <a href="{{ route('bookings.create') }}"
-                            class="flex items-center p-3 bg-gradient-to-br from-luxury-50/50 to-white/30 dark:from-gray-800/50 dark:to-gray-900/30 rounded-lg border border-luxury-200/20 dark:border-gold-500/10 hover:bg-luxury-100/50 dark:hover:bg-gold-900/20 transition-colors group">
+                            class="flex items-center p-3 bg-linear-to-br from-luxury-50/50 to-white/30 dark:from-gray-800/50 dark:to-gray-900/30 rounded-lg border border-luxury-200/20 dark:border-gold-500/10 hover:bg-luxury-100/50 dark:hover:bg-gold-900/20 transition-colors group">
                             <div
-                                class="p-2 bg-gradient-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full mr-3 group-hover:from-luxury-200 dark:group-hover:from-gold-800/30">
+                                class="p-2 bg-linear-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full mr-3 group-hover:from-luxury-200 dark:group-hover:from-gold-800/30">
                                 <svg class="w-5 h-5 text-luxury-700 dark:text-gold-400" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -200,9 +200,9 @@
                         </a>
 
                         <a href="{{ route('guests.create') }}"
-                            class="flex items-center p-3 bg-gradient-to-br from-luxury-50/50 to-white/30 dark:from-gray-800/50 dark:to-gray-900/30 rounded-lg border border-luxury-200/20 dark:border-gold-500/10 hover:bg-luxury-100/50 dark:hover:bg-gold-900/20 transition-colors group">
+                            class="flex items-center p-3 bg-linear-to-br from-luxury-50/50 to-white/30 dark:from-gray-800/50 dark:to-gray-900/30 rounded-lg border border-luxury-200/20 dark:border-gold-500/10 hover:bg-luxury-100/50 dark:hover:bg-gold-900/20 transition-colors group">
                             <div
-                                class="p-2 bg-gradient-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full mr-3 group-hover:from-luxury-200 dark:group-hover:from-gold-800/30">
+                                class="p-2 bg-linear-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full mr-3 group-hover:from-luxury-200 dark:group-hover:from-gold-800/30">
                                 <svg class="w-5 h-5 text-luxury-700 dark:text-gold-400" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -215,9 +215,9 @@
                         </a>
 
                         <a href="{{ route('rooms.index') }}"
-                            class="flex items-center p-3 bg-gradient-to-br from-luxury-50/50 to-white/30 dark:from-gray-800/50 dark:to-gray-900/30 rounded-lg border border-luxury-200/20 dark:border-gold-500/10 hover:bg-luxury-100/50 dark:hover:bg-gold-900/20 transition-colors group">
+                            class="flex items-center p-3 bg-linear-to-br from-luxury-50/50 to-white/30 dark:from-gray-800/50 dark:to-gray-900/30 rounded-lg border border-luxury-200/20 dark:border-gold-500/10 hover:bg-luxury-100/50 dark:hover:bg-gold-900/20 transition-colors group">
                             <div
-                                class="p-2 bg-gradient-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full mr-3 group-hover:from-luxury-200 dark:group-hover:from-gold-800/30">
+                                class="p-2 bg-linear-to-br from-luxury-100 to-white dark:from-gold-900/20 dark:to-gray-800/20 rounded-full mr-3 group-hover:from-luxury-200 dark:group-hover:from-gold-800/30">
                                 <svg class="w-5 h-5 text-luxury-700 dark:text-gold-400" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

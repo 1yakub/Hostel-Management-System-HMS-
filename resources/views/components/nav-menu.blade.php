@@ -36,7 +36,7 @@
                 @auth
                     <form method="POST" action="{{ route('logout') }}" class="ml-4">
                         @csrf
-                        <button type="submit" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <button type="submit" class="text-gray-600 hover:text-gray-900 focus:outline-hidden">
                             {{ __('Logout') }}
                         </button>
                     </form>

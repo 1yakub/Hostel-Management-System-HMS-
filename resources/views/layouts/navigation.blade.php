@@ -50,7 +50,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6 space-x-4">
                 <!-- Dark mode toggle -->
                 <button type="button" data-dark-toggle
-                    class="p-2 text-luxury-800 dark:text-luxury-200 hover:bg-luxury-100 dark:hover:bg-luxury-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400">
+                    class="p-2 text-luxury-800 dark:text-luxury-200 hover:bg-luxury-100 dark:hover:bg-luxury-800 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-luxury-500 dark:focus:ring-luxury-400">
                     <span class="sr-only">Toggle dark mode</span>
                     <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -65,7 +65,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-luxury-600 dark:text-luxury-400 bg-white dark:bg-gray-800 hover:text-luxury-800 dark:hover:text-luxury-200 focus:outline-none transition ease-in-out duration-150">
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-luxury-600 dark:text-luxury-400 bg-white dark:bg-gray-800 hover:text-luxury-800 dark:hover:text-luxury-200 focus:outline-hidden transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
@@ -100,7 +100,7 @@
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-luxury-500 dark:text-luxury-400 hover:text-luxury-800 dark:hover:text-luxury-200 hover:bg-luxury-100 dark:hover:bg-luxury-900 focus:outline-none focus:bg-luxury-100 dark:focus:bg-luxury-900 focus:text-luxury-800 dark:focus:text-luxury-200 transition duration-150 ease-in-out">
+                    class="inline-flex items-center justify-center p-2 rounded-md text-luxury-500 dark:text-luxury-400 hover:text-luxury-800 dark:hover:text-luxury-200 hover:bg-luxury-100 dark:hover:bg-luxury-900 focus:outline-hidden focus:bg-luxury-100 dark:focus:bg-luxury-900 focus:text-luxury-800 dark:focus:text-luxury-200 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

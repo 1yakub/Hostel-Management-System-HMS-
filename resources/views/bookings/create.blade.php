@@ -13,7 +13,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xs sm:rounded-lg">
                 <div class="p-6">
                     <form action="{{ route('bookings.store') }}" method="POST" class="space-y-6">
                         @csrf
@@ -22,7 +22,7 @@
                         <div>
                             <x-input-label for="guest_ids" value="Guests" />
                             <select id="guest_ids" name="guest_ids[]" multiple
-                                class="mt-1 block w-full border-luxury-200 dark:border-luxury-700 bg-white/50 dark:bg-gray-900/50 text-luxury-900 dark:text-luxury-100 focus:border-luxury-500 dark:focus:border-luxury-600 focus:ring-luxury-500 dark:focus:ring-luxury-600 rounded-lg shadow-sm min-h-[120px]">
+                                class="mt-1 block w-full border-luxury-200 dark:border-luxury-700 bg-white/50 dark:bg-gray-900/50 text-luxury-900 dark:text-luxury-100 focus:border-luxury-500 dark:focus:border-luxury-600 focus:ring-luxury-500 dark:focus:ring-luxury-600 rounded-lg shadow-xs min-h-[120px]">
                                 @foreach ($guests as $guest)
                                     <option value="{{ $guest->id }}"
                                         {{ in_array($guest->id, old('guest_ids', [])) ? 'selected' : '' }}
@@ -52,7 +52,7 @@
                         <div>
                             <x-input-label for="room_id" value="Room" />
                             <select id="room_id" name="room_id"
-                                class="mt-1 block w-full border-luxury-200 dark:border-luxury-700 bg-white/50 dark:bg-gray-900/50 text-luxury-900 dark:text-luxury-100 focus:border-luxury-500 dark:focus:border-luxury-600 focus:ring-luxury-500 dark:focus:ring-luxury-600 rounded-lg shadow-sm">
+                                class="mt-1 block w-full border-luxury-200 dark:border-luxury-700 bg-white/50 dark:bg-gray-900/50 text-luxury-900 dark:text-luxury-100 focus:border-luxury-500 dark:focus:border-luxury-600 focus:ring-luxury-500 dark:focus:ring-luxury-600 rounded-lg shadow-xs">
                                 <option value="">Select a room</option>
                                 @foreach ($rooms as $room)
                                     <option value="{{ $room->id }}"
