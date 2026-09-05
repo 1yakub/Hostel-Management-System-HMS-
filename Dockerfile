@@ -18,14 +18,19 @@ COPY . .
 RUN mkdir -p bootstrap/cache storage/logs storage/framework/cache storage/framework/sessions storage/framework/views \
     && composer dump-autoload --no-dev --optimize --classmap-authoritative
 
-FROM --platform=$BUILDPLATFORM node:22-alpine AS assets
+FROM --platform=$BUILDPLATFORM node:22-bookworm-slim AS assets
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund
+# Tailwind scans these paths for class names. Every @source path in app.css must exist here,
+# including the framework pagination views, or the scan yields no utilities at all.
 COPY resources ./resources
+COPY app ./app
 COPY public ./public
-COPY vite.config.js ./
-RUN npm run build
+COPY vite.config.js postcss.config.js ./
+COPY --from=vendor /app/vendor/laravel/framework/src/Illuminate/Pagination/resources/views ./vendor/laravel/framework/src/Illuminate/Pagination/resources/views
+RUN npm run build \
+    && test "$(wc -c < public/build/assets/$(ls public/build/assets | grep css))" -gt 35000
 
 FROM serversideup/php:${PHP_VERSION}-fpm-nginx AS runtime
 ENV AUTORUN_ENABLED=true \

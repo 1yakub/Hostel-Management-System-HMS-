@@ -2,8 +2,12 @@
 
 @plugin '@tailwindcss/forms';
 
+/* Explicit template sources: the production image builds assets in a stage that holds only
+   resources/ and app/, so the class scan must not depend on automatic detection. */
+@source '../views';
+@source '../js';
+@source '../../app';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
 
 /* One family, self hosted, latin subsets only. Variable weight 300 to 900. */
 @font-face {
