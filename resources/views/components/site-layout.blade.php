@@ -9,10 +9,16 @@
     <meta name="description" content="{{ $description ?? config('hms.hostel_name').'. '.config('hms.tagline').' Dorm beds, private doubles and a family room in '.config('hms.city').'. Check live availability and request a booking.' }}">
     <meta property="og:title" content="{{ $title ?? config('hms.hostel_name') }}">
     <meta property="og:description" content="{{ config('hms.tagline') }}">
-    <meta property="og:image" content="{{ asset('images/hero-common-room.webp') }}">
+    <meta property="og:image" content="{{ asset('images/og.png') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="theme-color" content="#fbfaf7">
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <link rel="preload" href="{{ asset('fonts/bricolage-grotesque-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="32x32">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="preload" href="{{ asset('fonts/figtree-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-chalk text-ink antialiased">
@@ -30,7 +36,7 @@
     <header class="border-b border-rule bg-chalk/95 backdrop-blur supports-[backdrop-filter]:bg-chalk/80 sticky top-0 z-40" x-data="{ open: false }">
         <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-4">
             <a href="{{ url('/') }}" class="flex items-center gap-3">
-                <span aria-hidden="true" class="grid size-9 place-items-center rounded-control bg-fern-500 text-chalk font-semibold">{{ mb_substr(config('hms.hostel_name'), 0, 1) }}</span>
+                <img src="{{ asset('brand/mark-fern.svg') }}" alt="" width="40" height="36" class="h-9 w-10">
                 <span class="text-lg font-semibold tracking-tight">{{ config('hms.hostel_name') }}</span>
             </a>
             <nav class="hidden items-center gap-7 text-[0.95rem] md:flex" aria-label="Main">
@@ -78,7 +84,7 @@
     <footer class="mt-24 border-t border-rule">
         <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-3">
             <div>
-                <p class="text-lg font-semibold">{{ config('hms.hostel_name') }}</p>
+                <img src="{{ asset('brand/lockup-ink.svg') }}" alt="{{ config('hms.hostel_name') }}" width="183" height="40" class="h-10 w-auto">
                 <p class="mt-2 max-w-xs text-slate">{{ config('hms.tagline') }}</p>
             </div>
             <div class="text-slate">

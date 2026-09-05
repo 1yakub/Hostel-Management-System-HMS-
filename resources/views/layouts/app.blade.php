@@ -7,7 +7,9 @@
     <meta name="robots" content="noindex">
     <title>{{ isset($title) ? $title.' | ' : '' }}{{ config('app.name', 'HMS') }} back office</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <link rel="preload" href="{{ asset('fonts/bricolage-grotesque-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="32x32">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="preload" href="{{ asset('fonts/figtree-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-chalk-2 text-ink antialiased">
