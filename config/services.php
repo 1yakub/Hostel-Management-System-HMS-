@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'vertex' => [
+        'key_path' => env('VERTEX_SA_KEY_PATH'),
+    ],
+
 ];

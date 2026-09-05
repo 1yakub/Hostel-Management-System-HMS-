@@ -99,6 +99,8 @@
         </div>
     </footer>
 
+    <x-assistant />
+
     {{ $scripts ?? "" }}
 </body>
 </html>

@@ -10,6 +10,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
+        "google/auth": "^1.53",
+        "laravel/ai": "^0.11.2",
         "laravel/framework": "^13.0",
         "laravel/sanctum": "^4.3",
         "laravel/tinker": "^3.0"

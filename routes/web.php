@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssistantController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/availability', [HomeController::class, 'availability'])->name('availability');
+Route::post('/assistant', AssistantController::class)->middleware('throttle:assistant')->name('assistant');
+Route::post('/assistant/reset', [AssistantController::class, 'reset'])->name('assistant.reset');
 
 // Guest Booking Routes
 Route::get('/book-now', [GuestBookingController::class, 'create'])->name('guest.booking.create');

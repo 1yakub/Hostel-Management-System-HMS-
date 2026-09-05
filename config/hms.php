@@ -14,6 +14,22 @@ return [
     'currency_symbol' => env('HMS_CURRENCY_SYMBOL', '$'),
     'demo_mode' => env('HMS_DEMO_MODE', true),
 
+    // The website assistant. Every number here is a ceiling on spend and on abuse.
+    'assistant' => [
+        'enabled' => env('HMS_ASSISTANT_ENABLED', true),
+        'max_input_chars' => 500,
+        'per_minute' => 6,          // per IP, burst
+        'per_ten_minutes' => 12,    // per session
+        'session_daily_cap' => 30,  // per session per day
+        'site_daily_cap' => 400,    // whole site per day, then it rests until midnight
+        'history_turns' => 6,       // user plus assistant pairs kept in the session
+        // Tried in order; the SDK fails over on rate limits and provider errors.
+        'providers' => [
+            'vertex' => env('VERTEX_MODEL', 'qwen/qwen3-235b-a22b-instruct-2507-maas'),
+            'vertex-fallback' => env('VERTEX_FALLBACK_MODEL', 'google/gemini-2.5-flash'),
+        ],
+    ],
+
     // Questions the FAQ section shows and the assistant may answer from. Plain facts only.
     'faq' => [
         ['q' => 'What time is check in and check out?', 'a' => 'Check in opens at 2:00 PM and check out is by 11:00 AM. Early bag drop is free from 9:00 AM.'],
