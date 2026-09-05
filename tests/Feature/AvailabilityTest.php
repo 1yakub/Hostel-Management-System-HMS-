@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Booking;
 use App\Models\Room;
+use App\Models\Guest;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -41,10 +42,10 @@ class AvailabilityTest extends TestCase
     {
         $free = $this->room(['room_number' => 'FREE']);
         $taken = $this->room(['room_number' => 'TAKEN']);
-        $user = User::factory()->create();
+        $guest = Guest::create(['name' => 'Test Guest']);
         Booking::create([
             'room_id' => $taken->id,
-            'guest_id' => $user->id,
+            'guest_id' => $guest->id,
             'check_in_date' => now()->addDays(2)->toDateString(),
             'check_out_date' => now()->addDays(5)->toDateString(),
             'status' => 'active',
@@ -66,11 +67,11 @@ class AvailabilityTest extends TestCase
     {
         $this->room(['room_number' => 'SMALL', 'capacity' => 1]);
         $big = $this->room(['room_number' => 'BIG', 'capacity' => 4]);
-        $user = User::factory()->create();
+        $guest = Guest::create(['name' => 'Test Guest']);
         // A booking that ends on our check in day does not block the room.
         Booking::create([
             'room_id' => $big->id,
-            'guest_id' => $user->id,
+            'guest_id' => $guest->id,
             'check_in_date' => now()->addDays(1)->toDateString(),
             'check_out_date' => now()->addDays(3)->toDateString(),
             'status' => 'active',

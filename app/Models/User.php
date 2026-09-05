@@ -46,8 +46,15 @@ class User extends Authenticatable
         'is_staff' => 'boolean',
     ];
 
-    public function bookings()
+    /** The user's own guest record (web signups get one on first booking request). */
+    public function guest(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasMany(Booking::class, 'guest_id');
+        return $this->hasOne(Guest::class);
+    }
+
+    /** Bookings made through this account, via its guest record. */
+    public function bookings(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    {
+        return $this->hasManyThrough(Booking::class, Guest::class);
     }
 }
