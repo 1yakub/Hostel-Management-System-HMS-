@@ -2,27 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Full demo state: two accounts, the room inventory, and a week of bookings.
+     * Every seeder is idempotent so `db:seed` can run on a schedule to reset the demo.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-
         $this->call([
             UserSeeder::class,
             RoomSeeder::class,
+            DemoSeeder::class,
         ]);
     }
 }
