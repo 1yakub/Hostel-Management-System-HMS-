@@ -4,15 +4,16 @@
 # (nginx + php-fpm, unprivileged www-data, health check and Laravel automations built in).
 
 ARG PHP_VERSION=8.4
+ARG BUILDPLATFORM
 
-FROM serversideup/php:${PHP_VERSION}-cli AS vendor
+FROM --platform=$BUILDPLATFORM serversideup/php:${PHP_VERSION}-cli AS vendor
 WORKDIR /app
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-interaction --no-progress --no-scripts --prefer-dist --optimize-autoloader
 COPY . .
 RUN composer dump-autoload --no-dev --optimize --classmap-authoritative
 
-FROM node:22-alpine AS assets
+FROM --platform=$BUILDPLATFORM node:22-alpine AS assets
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund
