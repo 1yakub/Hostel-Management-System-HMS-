@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Support\Availability;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,10 @@ class GuestBookingController extends Controller
         ]);
 
         $room = Room::findOrFail($validated['room_id']);
+
+        if (! Availability::isRoomFree($room, $validated['check_in_date'], $validated['check_out_date'])) {
+            return back()->withInput()->withErrors(['room_id' => 'That bed was taken for those dates a moment ago. Please pick another.']);
+        }
 
         // Calculate number of nights
         $checkIn = \Carbon\Carbon::parse($validated['check_in_date']);

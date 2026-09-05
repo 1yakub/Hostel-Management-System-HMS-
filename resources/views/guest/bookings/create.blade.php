@@ -23,7 +23,7 @@
                                 @foreach ($availableRooms as $type => $rooms)
                                     <optgroup label="{{ $type }}">
                                         @foreach ($rooms as $room)
-                                            <option value="{{ $room->id }}">
+                                            <option value="{{ $room->id }}" @selected((int) old('room_id', request('room_id')) === $room->id)>
                                                 Room {{ $room->room_number }} - ${{ $room->price_per_night }}/night
                                             </option>
                                         @endforeach
@@ -41,7 +41,7 @@
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                     Check-in Date
                                 </label>
-                                <input type="date" name="check_in_date"
+                                <input type="date" name="check_in_date" value="{{ old('check_in_date', request('check_in_date')) }}" min="{{ now()->addDay()->toDateString() }}"
                                     class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300">
                                 @error('check_in_date')
                                     <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
@@ -51,7 +51,7 @@
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                     Check-out Date
                                 </label>
-                                <input type="date" name="check_out_date"
+                                <input type="date" name="check_out_date" value="{{ old('check_out_date', request('check_out_date')) }}" min="{{ now()->addDays(2)->toDateString() }}"
                                     class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300">
                                 @error('check_out_date')
                                     <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>

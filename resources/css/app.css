@@ -5,64 +5,105 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
-@custom-variant dark (&:is(.dark *));
-
-@theme {
-  --color-luxury-50: #f9f6f3;
-  --color-luxury-100: #f3ede7;
-  --color-luxury-200: #e7dbcf;
-  --color-luxury-300: #dbc9b7;
-  --color-luxury-400: #cfb79f;
-  --color-luxury-500: #c3a587;
-  --color-luxury-600: #b7936f;
-  --color-luxury-700: #8c6d4f;
-  --color-luxury-800: #61472f;
-  --color-luxury-900: #362210;
-
-  --color-gold-50: #fdfaf3;
-  --color-gold-100: #fbf5e7;
-  --color-gold-200: #f7ebcf;
-  --color-gold-300: #f3e1b7;
-  --color-gold-400: #efd79f;
-  --color-gold-500: #ebcd87;
-  --color-gold-600: #e7c36f;
-  --color-gold-700: #bc9441;
-  --color-gold-800: #8c6a23;
-  --color-gold-900: #5c4005;
-
-  --color-accent-50: #f5f3ff;
-  --color-accent-100: #ede9fe;
-  --color-accent-200: #ddd6fe;
-  --color-accent-300: #c4b5fd;
-  --color-accent-400: #a78bfa;
-  --color-accent-500: #8b5cf6;
-  --color-accent-600: #7c3aed;
-  --color-accent-700: #6d28d9;
-  --color-accent-800: #5b21b6;
-  --color-accent-900: #4c1d95;
-  --color-accent-950: #2e1065;
-
-  --font-sans: Montserrat, sans-serif;
-  --font-serif: Playfair Display, serif;
-
-  --shadow-luxury: 0 4px 20px rgba(140, 109, 79, 0.1);
-  --shadow-luxury-lg: 0 10px 30px rgba(140, 109, 79, 0.2);
+/* One family, self hosted, latin subsets only. Variable axes: optical size 12 to 96, weight 300 to 800. */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url('/fonts/bricolage-grotesque-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url('/fonts/bricolage-grotesque-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+@theme {
+  /* Palette: chalk page, ink text, fern primary, marigold single accent, slate muted, rule lines. */
+  --color-chalk: #fbfaf7;
+  --color-chalk-2: #f3f1eb;
+  --color-ink: #16211d;
+  --color-ink-2: #2b3833;
+  --color-slate: #5b6660;
+  --color-slate-2: #8a948e;
+  --color-rule: #e3e1da;
+  --color-fern-50: #eef5f1;
+  --color-fern-100: #d5e7dd;
+  --color-fern-500: #2e6b4f;
+  --color-fern-600: #275b43;
+  --color-fern-700: #1f4a37;
+  --color-marigold-100: #fbefc9;
+  --color-marigold-500: #e9b949;
+  --color-marigold-600: #d4a633;
+  --color-danger: #b23a3a;
+  --color-ok: #2e6b4f;
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
+  --font-sans: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-control: 8px;
+  --radius-photo: 12px;
+
+  --shadow-lift: 0 1px 2px rgba(22, 33, 29, 0.06), 0 8px 24px rgba(22, 33, 29, 0.08);
+
+  --text-display: clamp(2.5rem, 1.6rem + 3.2vw, 4.75rem);
+  --text-display--line-height: 1.02;
+  --text-title: clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem);
+  --text-title--line-height: 1.1;
+}
+
 @layer base {
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+    border-color: var(--color-rule, currentcolor);
   }
+  html {
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    color: var(--color-ink);
+    background: var(--color-chalk);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    font-weight: 400;
+  }
+  h1, h2, h3 {
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-fern-500);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--color-marigold-100);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@utility display {
+  font-size: var(--text-display);
+  line-height: var(--text-display--line-height);
+  font-weight: 650;
+  font-variation-settings: 'opsz' 96;
+}
+@utility title {
+  font-size: var(--text-title);
+  line-height: var(--text-title--line-height);
+  font-weight: 600;
+  font-variation-settings: 'opsz' 60;
+}
+@utility measure {
+  max-width: 62ch;
 }
