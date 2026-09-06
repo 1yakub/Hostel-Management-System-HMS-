@@ -76,6 +76,25 @@ guards.
 Provider, models and limits live in `config/ai.php` and `config/hms.php`. Set
 `HMS_ASSISTANT_ENABLED=false` to remove the widget and the route.
 
+## Security, in framework terms
+
+Every protection is a Laravel mechanism or a maintained package, not a hand written check.
+
+- Three areas, three prefixes: the public site at `/`, a guest's own space under `/my`, the
+  staff desk under `/desk`.
+- The desk is gated by an `access-desk` Gate through the `can` middleware, and each desk
+  resource (rooms, guests, bookings) by its Policy, so a guest account gets a 403 on every
+  desk URL and verb.
+- Every desk write goes through a Form Request; capacity and availability checks are "after"
+  validation rules, so the controller only stores.
+- Sign in is Breeze with its rate limiter; the assistant has its own limiters and caps.
+- A Content Security Policy is set on every response by spatie/laravel-csp with a per
+  request nonce shared with the Vite tags; scripts, styles, fonts and images come from this
+  origin only, and the page cannot be framed. The remaining headers (nosniff, referrer
+  policy, permissions policy) are added by nginx inside the image.
+
+The desk account is part of the public demo on purpose; the data resets every night.
+
 ## Run it locally
 
 Requirements: PHP 8.4, Composer, Node 22, or Docker.
