@@ -11,7 +11,7 @@ class UserSeeder extends Seeder
     /** Demo accounts. Passwords come from the environment so a real deployment never ships "password". */
     public function run(): void
     {
-        $password = env('HMS_DEMO_PASSWORD', 'password');
+        $password = config('hms.demo_password');
 
         User::updateOrCreate(['email' => 'staff@example.com'], [
             'name' => 'Desk Staff',

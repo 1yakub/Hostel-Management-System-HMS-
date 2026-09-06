@@ -25,7 +25,7 @@
             @if (config('hms.demo_mode'))
                 <div class="rounded-control border border-rule bg-chalk-2 p-4 text-sm text-slate">
                     <p class="font-medium text-ink">Demo accounts</p>
-                    <p class="mt-1">Desk staff: staff@example.com &middot; Guest: guest@example.com &middot; password: <span class="font-mono">password</span></p>
+                    <p class="mt-1">Desk staff: staff@example.com &middot; Guest: guest@example.com &middot; password: <span class="font-mono">{{ config(\'hms.demo_password\') }}</span></p>
                     <p class="mt-1">The database resets every night.</p>
                 </div>
             @endif

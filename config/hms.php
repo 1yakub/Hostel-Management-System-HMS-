@@ -12,6 +12,8 @@ return [
     'check_out' => env('HMS_CHECK_OUT', '11:00 AM'),
     'currency' => env('HMS_CURRENCY', 'USD'),
     'currency_symbol' => env('HMS_CURRENCY_SYMBOL', '$'),
+    // shown on the sign in page; the desk is part of the public demo and the data resets nightly
+    'demo_password' => env('HMS_DEMO_PASSWORD', 'password'),
     'demo_mode' => env('HMS_DEMO_MODE', true),
 
     // The website assistant. Every number here is a ceiling on spend and on abuse.
