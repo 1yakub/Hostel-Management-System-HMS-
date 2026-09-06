@@ -20,6 +20,7 @@ class AssistantGuardTest extends TestCase
         $this->postJson('/assistant', ['message' => str_repeat('a', 501)])->assertStatus(422);
     }
 
+
     public function test_per_visitor_burst_limit_applies(): void
     {
         $limit = (int) config('hms.assistant.per_minute');

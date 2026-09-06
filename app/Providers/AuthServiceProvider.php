@@ -23,6 +23,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        // the desk is for staff; policies then decide per record
+        Gate::define('access-desk', fn (\App\Models\User $user) => $user->is_staff);
+
         //
     }
 }

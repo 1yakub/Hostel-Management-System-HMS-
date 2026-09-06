@@ -21,7 +21,7 @@
 
         <x-panel title="Remove this guest">
             <p class="text-sm text-slate">Only possible when the guest has no active booking.</p>
-            <form action="{{ route('guests.destroy', $guest) }}" method="POST" class="mt-4" onsubmit="return confirm('Delete {{ addslashes($guest->name) }}? This cannot be undone.');">
+            <form action="{{ route('guests.destroy', $guest) }}" method="POST" class="mt-4" x-data @submit.prevent="if (confirm('Delete {{ addslashes($guest->name) }}? This cannot be undone.')) $el.submit()">
                 @csrf
                 @method('DELETE')
                 <x-danger-button>Delete guest</x-danger-button>

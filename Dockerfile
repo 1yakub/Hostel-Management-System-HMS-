@@ -34,6 +34,8 @@ RUN npm run build \
     && test "$(wc -c < public/build/assets/$(ls public/build/assets | grep css))" -gt 35000
 
 FROM serversideup/php:${PHP_VERSION}-fpm-nginx AS runtime
+# extra response headers, picked up by the image's nginx server block
+COPY docker/nginx/security-headers.conf /etc/nginx/server-opts.d/security-headers.conf
 ENV AUTORUN_ENABLED=true \
     AUTORUN_LARAVEL_MIGRATION=true \
     AUTORUN_LARAVEL_STORAGE_LINK=false \

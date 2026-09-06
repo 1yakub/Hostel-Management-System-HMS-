@@ -14,6 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // The app only ever sits behind the platform reverse proxy on the same host, which
         // terminates TLS. Trusting it lets Laravel see https and the real client address.
         $middleware->trustProxies(at: '*');
+
+        // Content Security Policy on every web response (spatie/laravel-csp)
+        $middleware->web(append: [\Spatie\Csp\AddCspHeaders::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

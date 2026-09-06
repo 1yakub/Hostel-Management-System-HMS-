@@ -21,7 +21,7 @@
 
         <x-panel title="Remove this room">
             <p class="text-sm text-slate">Only possible when the room has no active bookings. Past bookings keep their record.</p>
-            <form action="{{ route('rooms.destroy', $room) }}" method="POST" class="mt-4" onsubmit="return confirm('Delete room {{ $room->room_number }}? This cannot be undone.');">
+            <form action="{{ route('rooms.destroy', $room) }}" method="POST" class="mt-4" x-data @submit.prevent="if (confirm('Delete room {{ $room->room_number }}? This cannot be undone.')) $el.submit()">
                 @csrf
                 @method('DELETE')
                 <x-danger-button>Delete room</x-danger-button>

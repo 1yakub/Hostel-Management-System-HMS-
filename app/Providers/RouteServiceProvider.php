@@ -25,7 +25,6 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Register the staff middleware
-        $this->app['router']->aliasMiddleware('staff', \App\Http\Middleware\StaffMiddleware::class);
 
         $this->configureRateLimiting();
 

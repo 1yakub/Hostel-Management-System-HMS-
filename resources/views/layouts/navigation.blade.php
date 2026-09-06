@@ -33,7 +33,7 @@
                     <x-dropdown-link :href="route('profile.edit')">Profile</x-dropdown-link>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">Log out</x-dropdown-link>
+                        <x-dropdown-link :href="route('logout')" @click.prevent="$el.closest('form').submit()">Log out</x-dropdown-link>
                     </form>
                 </x-slot>
             </x-dropdown>
@@ -65,7 +65,7 @@
                 <x-responsive-nav-link :href="route('profile.edit')">Profile</x-responsive-nav-link>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">Log out</x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('logout')" @click.prevent="$el.closest('form').submit()">Log out</x-responsive-nav-link>
                 </form>
             </div>
         </div>

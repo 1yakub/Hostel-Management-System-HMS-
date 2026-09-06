@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestBookingRequest;
 use App\Models\Booking;
 use App\Models\Guest;
 use App\Models\Room;
-use App\Support\Availability;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 
+/** A signed in guest's own bookings under /my. Every query is scoped to the current user. */
 class GuestBookingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bookings = Auth::user()->bookings()->with('room')->latest('check_in_date')->get();
+        $bookings = $request->user()->bookings()->with('room')->latest('check_in_date')->get();
 
         return view('guest.bookings.index', compact('bookings'));
     }
@@ -28,26 +28,16 @@ class GuestBookingController extends Controller
             ->groupBy('room_type');
 
         if ($availableRooms->isEmpty()) {
-            return redirect('/')->with('error', 'No beds are open for requests at the moment.');
+            return redirect()->route('home')->with('error', 'No beds are open for requests at the moment.');
         }
 
         return view('guest.bookings.create', compact('availableRooms'));
     }
 
-    public function store(Request $request)
+    public function store(RequestBookingRequest $request)
     {
-        $validated = $request->validate([
-            'room_id' => ['required', 'integer', 'exists:rooms,id'],
-            'check_in_date' => ['required', 'date', 'after:today'],
-            'check_out_date' => ['required', 'date', 'after:check_in_date'],
-        ]);
-
-        $room = Room::findOrFail($validated['room_id']);
-
-        if (! Availability::isRoomFree($room, $validated['check_in_date'], $validated['check_out_date'])) {
-            return back()->withInput()->withErrors(['room_id' => 'That bed was taken for those dates a moment ago. Please pick another.']);
-        }
-
+        $validated = $request->validated();
+        $room = $request->room();
         $nights = Carbon::parse($validated['check_in_date'])->diffInDays($validated['check_out_date']);
 
         Booking::create([

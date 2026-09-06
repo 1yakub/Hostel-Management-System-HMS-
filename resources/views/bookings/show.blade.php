@@ -5,7 +5,7 @@
             <h1 class="mt-1 text-2xl font-semibold tracking-tight">{{ $booking->guest?->name ?? 'Guest' }} in room {{ $booking->room->room_number }}</h1>
         </div>
         @if ($booking->status === 'active')
-            <form action="{{ route('bookings.checkout', $booking) }}" method="POST" onsubmit="return confirm('Check this guest out and free the room?');">
+            <form action="{{ route('bookings.checkout', $booking) }}" method="POST" x-data @submit.prevent="if (confirm('Check this guest out and free the room?')) $el.submit()">
                 @csrf
                 @method('PATCH')
                 <x-primary-button>Check out</x-primary-button>

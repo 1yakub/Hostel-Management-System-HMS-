@@ -35,8 +35,8 @@ class DeskBookingTest extends TestCase
     {
         $guest = User::factory()->create(['is_staff' => false]);
 
-        $this->actingAs($guest)->get('/bookings')->assertRedirect();
-        $this->actingAs($guest)->get('/rooms/create')->assertRedirect();
+        $this->actingAs($guest)->get('/desk/bookings')->assertForbidden();
+        $this->actingAs($guest)->get('/desk/rooms/create')->assertForbidden();
     }
 
     public function test_desk_booking_rejects_an_overlapping_stay(): void
@@ -47,7 +47,7 @@ class DeskBookingTest extends TestCase
         Booking::create(['room_id' => $room->id, 'guest_id' => $a->id, 'check_in_date' => now()->addDays(2)->toDateString(), 'check_out_date' => now()->addDays(5)->toDateString(), 'status' => 'active', 'total_amount' => 150]);
 
         $this->actingAs($this->staff())
-            ->post('/bookings', ['guest_ids' => [$b->id], 'room_id' => $room->id, 'check_in_date' => now()->addDays(4)->toDateString(), 'check_out_date' => now()->addDays(6)->toDateString()])
+            ->post('/desk/bookings', ['guest_ids' => [$b->id], 'room_id' => $room->id, 'check_in_date' => now()->addDays(4)->toDateString(), 'check_out_date' => now()->addDays(6)->toDateString()])
             ->assertSessionHasErrors('room_id');
 
         $this->assertEquals(1, Booking::count());
@@ -60,7 +60,7 @@ class DeskBookingTest extends TestCase
         $b = Guest::create(['name' => 'B']);
 
         $this->actingAs($this->staff())
-            ->post('/bookings', ['guest_ids' => [$a->id, $b->id], 'room_id' => $room->id, 'check_in_date' => now()->addDay()->toDateString(), 'check_out_date' => now()->addDays(2)->toDateString()])
+            ->post('/desk/bookings', ['guest_ids' => [$a->id, $b->id], 'room_id' => $room->id, 'check_in_date' => now()->addDay()->toDateString(), 'check_out_date' => now()->addDays(2)->toDateString()])
             ->assertSessionHasErrors('guest_ids');
     }
 
@@ -71,7 +71,7 @@ class DeskBookingTest extends TestCase
         $b = Guest::create(['name' => 'B']);
 
         $this->actingAs($this->staff())
-            ->post('/bookings', ['guest_ids' => [$a->id, $b->id], 'room_id' => $room->id, 'check_in_date' => now()->addDays(3)->toDateString(), 'check_out_date' => now()->addDays(5)->toDateString()])
+            ->post('/desk/bookings', ['guest_ids' => [$a->id, $b->id], 'room_id' => $room->id, 'check_in_date' => now()->addDays(3)->toDateString(), 'check_out_date' => now()->addDays(5)->toDateString()])
             ->assertRedirect();
 
         $this->assertEquals(80, Booking::where('guest_id', $a->id)->value('total_amount'));
@@ -89,7 +89,7 @@ class DeskBookingTest extends TestCase
         $primary = Booking::create(['room_id' => $room->id, 'guest_id' => $a->id, 'check_in_date' => $in, 'check_out_date' => $out, 'status' => 'active', 'total_amount' => 100]);
         Booking::create(['room_id' => $room->id, 'guest_id' => $b->id, 'check_in_date' => $in, 'check_out_date' => $out, 'status' => 'active', 'total_amount' => 0]);
 
-        $this->actingAs($this->staff())->patch("/bookings/{$primary->id}/checkout")->assertRedirect();
+        $this->actingAs($this->staff())->patch("/desk/bookings/{$primary->id}/checkout")->assertRedirect();
 
         $this->assertEquals(2, Booking::where('status', 'completed')->count());
         $this->assertEquals('available', $room->fresh()->status);
@@ -101,7 +101,7 @@ class DeskBookingTest extends TestCase
         $user = User::factory()->create(['is_staff' => false]);
 
         $this->actingAs($user)
-            ->post('/book-now', ['room_id' => $room->id, 'check_in_date' => now()->addDays(2)->toDateString(), 'check_out_date' => now()->addDays(4)->toDateString()])
+            ->post('/my/book', ['room_id' => $room->id, 'check_in_date' => now()->addDays(2)->toDateString(), 'check_out_date' => now()->addDays(4)->toDateString()])
             ->assertRedirect(route('guest.bookings'));
 
         $this->assertEquals(1, Guest::where('user_id', $user->id)->count());
