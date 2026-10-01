@@ -2,12 +2,13 @@
 
 namespace App\Support;
 
-use Google\Auth\Credentials\ServiceAccountCredentials;
+use Google\Auth\CredentialsLoader;
 use Illuminate\Support\Facades\Cache;
 use RuntimeException;
 
 /**
- * Short lived access token for Vertex AI, minted from a service account that holds only
+ * Short lived access token for Vertex AI, minted from a service account (a key file, or a keyless
+ * Workload Identity Federation config from the Azure VM) that holds only
  * roles/aiplatform.user. The key file lives outside the repository (VERTEX_SA_KEY_PATH)
  * and the token is cached for fifty minutes so a busy hour costs one signing call.
  */
@@ -18,7 +19,7 @@ class VertexToken
     public static function get(): string
     {
         return Cache::remember(self::CACHE_KEY, now()->addMinutes(50), function () {
-            $credentials = new ServiceAccountCredentials(
+            $credentials = CredentialsLoader::makeCredentials(
                 ['https://www.googleapis.com/auth/cloud-platform'],
                 self::keyJson(),
             );
