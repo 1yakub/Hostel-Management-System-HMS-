@@ -134,18 +134,18 @@ return [
         ],
 
         'vertex' => [
-            'driver' => 'openai-compatible',
+            'driver' => 'vertex-openai',
             'url' => env('VERTEX_OPENAI_URL'),
             'key' => null, // set at runtime from a service account token, see App\Support\VertexToken
             'models' => [
                 'text' => [
-                    'default' => env('VERTEX_MODEL', 'google/gemini-3.5-flash'),
+                    'default' => env('VERTEX_MODEL', 'openai/gpt-oss-120b-maas'),
                 ],
             ],
         ],
 
         'vertex-fallback' => [
-            'driver' => 'openai-compatible',
+            'driver' => 'vertex-openai',
             'url' => env('VERTEX_OPENAI_URL'),
             'key' => null, // set at runtime, same token as 'vertex'
             'models' => [

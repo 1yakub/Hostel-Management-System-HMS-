@@ -25,9 +25,11 @@ return [
         'session_daily_cap' => 30,  // per session per day
         'site_daily_cap' => 400,    // whole site per day, then it rests until midnight
         'history_turns' => 6,       // user plus assistant pairs kept in the session
-        // Tried in order; the SDK fails over on rate limits and provider errors.
+        // Tried in order. The SDK fails over on 429, 402 and 5xx overloads; VertexGateway adds 404
+        // (a withdrawn model). Picked Nov 24 2026 by the five question test: both pass all five;
+        // Gemini 3.x fails tool calls here (missing thought_signature on the OpenAI compatible API).
         'providers' => [
-            'vertex' => env('VERTEX_MODEL', 'qwen/qwen3-235b-a22b-instruct-2507-maas'),
+            'vertex' => env('VERTEX_MODEL', 'openai/gpt-oss-120b-maas'),
             'vertex-fallback' => env('VERTEX_FALLBACK_MODEL', 'google/gemini-2.5-flash'),
         ],
     ],
